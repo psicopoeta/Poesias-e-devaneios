@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Versos & Algoritmos | Poesia e Arte Digital</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://app.lemonsqueezy.com/js/lemon.js" defer></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f5f2ed;
+            color: #1a1a1a;
+        }
+        .font-serif {
+            font-family: 'Cormorant Garamond', serif;
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .book-spine {
+            transition: transform 0.3s ease;
+        }
+        .book-spine:hover {
+            transform: rotateY(-10deg) translateX(-5px);
+        }
+        .lemonsqueezy-button {
+            background: #000;
+            color: #fff;
+            padding: 0.75rem 2rem;
+            border-radius: 9999px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        .lemonsqueezy-button:hover {
+            background: #333;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 top-0 bg-white/90 backdrop-blur-md shadow-sm" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <a href="#" class="font-serif text-2xl font-bold">Versos & Algoritmos</a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#poemas" class="text-sm uppercase tracking-widest hover:text-yellow-600">Poemas</a>
+                    <a href="#ebooks" class="text-sm uppercase tracking-widest hover:text-yellow-600">E-books</a>
+                    <a href="#sobre" class="text-sm uppercase tracking-widest hover:text-yellow-600">Sobre</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen flex items-center justify-center pt-20 px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <h1 class="font-serif text-5xl md:text-7xl font-light mb-6">
+                Onde as palavras<br>
+                <span class="italic text-yellow-600">encontram</span> visões
+            </h1>
+            <p class="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
+                Uma coleção de poemas originais ilustrados por inteligência artificial.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#ebooks" class="lemonsqueezy-button">
+                    Adquirir E-books
+                </a>
+                <a href="#poemas" class="px-8 py-3 border border-black rounded-full hover:bg-black hover:text-white transition">
+                    Ler Online
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Poem -->
+    <section id="poema-destaque" class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <span class="text-yellow-600 text-sm uppercase tracking-widest mb-4 block">Destaque</span>
+                    <h2 class="font-serif text-4xl mb-6">Silêncios Digitais</h2>
+                    <p class="text-gray-600 font-serif italic text-lg leading-relaxed mb-6">
+                        No espaço entre um bit e outro,<br>
+                        habita o eco do que não foi dito.<br>
+                        Algoritmos sonham em poesia...
+                    </p>
+                    <button onclick="showFullPoem()" class="text-sm uppercase tracking-widest border-b-2 border-black pb-1 hover:text-yellow-600">
+                        Ler completo
+                    </button>
+                </div>
+                <div class="aspect-[3/4] rounded-lg overflow-hidden shadow-xl">
+                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800" 
+                         alt="Arte digital" class="w-full h-full object-cover hover:scale-110 transition duration-700">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- E-books Store -->
+    <section id="ebooks" class="py-20 bg-yellow-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="font-serif text-4xl mb-4">E-books Disponíveis</h2>
+                <p class="text-gray-600">Download imediato após pagamento</p>
+            </div>
+
+            <!-- Bundle Destaque -->
+            <div class="mb-12 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-3xl p-1">
+                <div class="bg-white rounded-[22px] p-8 md:p-12">
+                    <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <span class="inline-block bg-green-100 text-green-800 text-xs font-bold px-3 py-1 rounded-full mb-4">
+                                ECONOMIZE R$ 14,80
+                            </span>
+                            <h3 class="font-serif text-3xl mb-4">Coleção Completa</h3>
+                            <p class="text-gray-600 mb-6">3 volumes + 5 poemas bônus + artes em 4K</p>
+                            <ul class="space-y-2 mb-6 text-sm text-gray-600">
+                                <li>✓ 75 poemas completos</li>
+                                <li>✓ 50+ imagens em alta resolução</li>
+                                <li>✓ Acesso vitalício</li>
+                            </ul>
+                            <div class="flex items-baseline gap-3 mb-6">
+                                <span class="text-4xl font-serif font-bold">R$ 49,90</span>
+                                <span class="text-gray-400 line-through">R$ 64,70</span>
+                            </div>
+                            <a href="https://SEU-LINK-BUNDLE.lemonsqueezy.com" 
+                               class="lemonsqueezy-button text-lg"
+                               data-overlay="true">
+                                Comprar Coleção
+                            </a>
+                        </div>
+                        <div class="flex justify-center gap-4">
+                            <div class="w-24 h-36 bg-gray-800 rounded shadow-lg"></div>
+                            <div class="w-24 h-36 bg-yellow-700 rounded shadow-lg -mt-4"></div>
+                            <div class="w-24 h-36 bg-green-900 rounded shadow-lg"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Produtos Individuais -->
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Vol 1 -->
+                <div class="bg-white rounded-2xl p-6 shadow-lg text-center">
+                    <div class="w-32 h-48 bg-gradient-to-br from-gray-800 to-gray-600 rounded-lg mx-auto mb-4 shadow-xl flex items-center justify-center text-white font-serif">
+                        Vol. I
+                    </div>
+                    <h3 class="font-serif text-xl mb-2">Silêncios Binários</h3>
+                    <p class="text-gray-600 text-sm mb-4">25 poemas digitais</p>
+                    <p class="text-2xl font-serif font-bold mb-4">R$ 19,90</p>
+                    <a href="https://SEU-LINK-VOL1.lemonsqueezy.com" 
+                       class="lemonsqueezy-button text-sm"
+                       data-overlay="true">
+                        Comprar
+                    </a>
+                </div>
+
+                <!-- Vol 2 -->
+                <div class="bg-white rounded-2xl p-6 shadow-lg text-center">
+                    <div class="w-32 h-48 bg-gradient-to-br from-yellow-600 to-yellow-800 rounded-lg mx-auto mb-4 shadow-xl flex items-center justify-center text-white font-serif">
+                        Vol. II
+                    </div>
+                    <h3 class="font-serif text-xl mb-2">Algoritmos do Amor</h3>
+                    <p class="text-gray-600 text-sm mb-4">30 poemas</p>
+                    <p class="text-2xl font-serif font-bold mb-4">R$ 24,90</p>
+                    <a href="https://SEU-LINK-VOL2.lemonsqueezy.com" 
+                       class="lemonsqueezy-button text-sm"
+                       data-overlay="true">
+                        Comprar
+                    </a>
+                </div>
+
+                <!-- Vol 3 -->
+                <div class="bg-white rounded-2xl p-6 shadow-lg text-center">
+                    <div class="w-32 h-48 bg-gradient-to-br from-green-800 to-teal-900 rounded-lg mx-auto mb-4 shadow-xl flex items-center justify-center text-white font-serif">
+                        Vol. III
+                    </div>
+                    <h3 class="font-serif text-xl mb-2">Natureza Compilada</h3>
+                    <p class="text-gray-600 text-sm mb-4">20 poemas</p>
+                    <p class="text-2xl font-serif font-bold mb-4">R$ 19,90</p>
+                    <a href="https://SEU-LINK-VOL3.lemonsqueezy.com" 
+                       class="lemonsqueezy-button text-sm"
+                       data-overlay="true">
+                        Comprar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Como Funciona -->
+    <section class="py-16 bg-white">
+        <div class="max-w-4xl mx-auto px-6">
+            <h3 class="font-serif text-2xl text-center mb-12">Como funciona</h3>
+            <div class="grid md:grid-cols-3 gap-8 text-center">
+                <div>
+                    <div class="w-12 h-12 bg-black text-white rounded-full flex items-center justify-center mx-auto mb-4 text-xl">1</div>
+                    <h4 class="font-medium mb-2">Escolha</h4>
+                    <p class="text-sm text-gray-600">Selecione o e-book ou coleção</p>
+                </div>
+                <div>
+                    <div class="w-12 h-12 bg-black text-white rounded-full flex items-center justify-center mx-auto mb-4 text-xl">2</div>
+                    <h4 class="font-medium mb-2">Pague</h4>
+                    <p class="text-sm text-gray-600">Cartão, PIX ou PayPal</p>
+                </div>
+                <div>
+                    <div class="w-12 h-12 bg-black text-white rounded-full flex items-center justify-center mx-auto mb-4 text-xl">3</div>
+                    <h4 class="font-medium mb-2">Receba</h4>
+                    <p class="text-sm text-gray-600">Download imediato no e-mail</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-12">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <div class="font-serif text-2xl mb-4">Versos & Algoritmos</div>
+            <p class="text-gray-400 text-sm">© 2024 Todos os direitos reservados</p>
+        </div>
+    </footer>
+
+    <!-- Modal Simples -->
+    <div id="poemModal" class="fixed inset-0 bg-black/80 hidden items-center justify-center p-4 z-50">
+        <div class="bg-white max-w-2xl w-full rounded-2xl p-8 relative">
+            <button onclick="closePoem()" class="absolute top-4 right-4 text-2xl">&times;</button>
+            <div id="poemText" class="font-serif text-xl text-center py-8"></div>
+        </div>
+    </div>
+
+    <script>
+        // Inicializar ícones
+        lucide.createIcons();
+
+        // Mostrar poema completo
+        function showFullPoem() {
+            const modal = document.getElementById('poemModal');
+            const text = document.getElementById('poemText');
+            text.innerHTML = `
+                <h2 class="text-3xl mb-8">Silêncios Digitais</h2>
+                <div class="space-y-4 text-gray-700">
+                    <p>No espaço entre um bit e outro,</p>
+                    <p>habita o eco do que não foi dito.</p>
+                    <p>Algoritmos sonham em poesia,</p>
+                    <p>enquanto eu digito versos solitários</p>
+                    <p>na madrugada iluminada por pixels.</p>
+                    <br>
+                    <p>O vento não entra pela janela,</p>
+                    <p>mas o fan do processador</p>
+                    <p>sussurra segredos de um mundo</p>
+                    <p>que existe apenas em código.</p>
+                </div>
+            `;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closePoem() {
+            const modal = document.getElementById('poemModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        // Fechar modal ao clicar fora
+        document.getElementById('poemModal').addEventListener('click', function(e) {
+            if (e.target === this) closePoem();
+        });
+
+        // Animação suave ao scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
+    </script>
+</body>
+</html>
