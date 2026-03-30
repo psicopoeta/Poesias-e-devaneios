@@ -1,296 +1,657 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Versos & Algoritmos | Poesia e Arte Digital</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <script src="https://app.lemonsqueezy.com/js/lemon.js" defer></script>
+    <title>Versos & Algoritmos | Poesia de [Seu Nome]</title>
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f5f2ed;
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Georgia', 'Times New Roman', serif; 
+            background: #f5f2ed; 
+            color: #1a1a1a;
+            line-height: 1.8;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
+        /* Navegação */
+        nav { 
+            background: rgba(255,255,255,0.98); 
+            padding: 20px 0; 
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+            border-bottom: 1px solid #e5e5e5;
+        }
+        .nav-flex { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+        }
+        .logo { 
+            font-size: 26px; 
+            font-weight: 400; 
+            font-style: italic;
+            letter-spacing: -0.5px;
+        }
+        .nav-links { display: flex; gap: 35px; }
+        .nav-links a { 
+            text-decoration: none; 
+            color: #444; 
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: color 0.3s;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+        .nav-links a:hover { color: #b8860b; }
+        
+        /* Hero */
+        .hero { 
+            min-height: 100vh; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            text-align: center;
+            padding: 120px 20px 80px;
+            background: linear-gradient(180deg, #f5f2ed 0%, #fff 100%);
+        }
+        .hero h1 { 
+            font-size: clamp(42px, 10vw, 84px); 
+            line-height: 1.05; 
+            margin-bottom: 25px;
+            font-weight: 400;
+            font-style: italic;
+            letter-spacing: -2px;
+        }
+        .hero .destaque { 
+            color: #b8860b; 
+            font-style: italic; 
+        }
+        .hero .subtitle {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #888;
+            margin-bottom: 30px;
+        }
+        .hero p { 
+            font-size: 18px; 
+            color: #555; 
+            margin-bottom: 40px; 
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 300;
+        }
+        
+        /* Botões Stripe */
+        .btn { 
+            display: inline-block; 
+            padding: 18px 45px; 
+            background: #635BFF; /* Cor oficial Stripe */
+            color: #fff; 
+            text-decoration: none; 
+            border-radius: 50px;
+            margin: 8px;
+            transition: all 0.3s;
+            border: 2px solid #635BFF;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            cursor: pointer;
+        }
+        .btn:hover { 
+            background: transparent; 
+            color: #635BFF; 
+        }
+        .btn-dark {
+            background: #1a1a1a;
+            border-color: #1a1a1a;
+        }
+        .btn-dark:hover {
+            background: transparent;
             color: #1a1a1a;
         }
-        .font-serif {
-            font-family: 'Cormorant Garamond', serif;
+        .btn-small {
+            padding: 12px 30px;
+            font-size: 12px;
         }
-        .fade-in {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
+        
+        /* Seções */
+        section { padding: 100px 20px; }
+        .bg-white { background: #fff; }
+        .bg-cream { background: #faf8f5; }
+        .bg-dark { 
+            background: #1a1a1a; 
+            color: #fff; 
         }
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
+        
+        h2 { 
+            font-size: 48px; 
+            text-align: center; 
+            margin-bottom: 20px;
+            font-weight: 400;
+            font-style: italic;
         }
-        .book-spine {
-            transition: transform 0.3s ease;
+        .section-subtitle {
+            text-align: center;
+            color: #777;
+            margin-bottom: 60px;
+            font-size: 15px;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
         }
-        .book-spine:hover {
-            transform: rotateY(-10deg) translateX(-5px);
+        
+        /* Poemas Preview */
+        .poem-preview {
+            background: #fff;
+            padding: 40px;
+            margin: 20px 0;
+            border-left: 4px solid #635BFF;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.06);
         }
-        .lemonsqueezy-button {
-            background: #000;
+        .poem-preview h4 {
+            font-style: italic;
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #1a1a1a;
+        }
+        .poem-preview .verses {
+            font-style: italic;
+            color: #555;
+            line-height: 2;
+            margin-bottom: 15px;
+        }
+        .poem-preview .tag {
+            display: inline-block;
+            background: #f5f2ed;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #888;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+        
+        /* Produtos */
+        .product-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+            gap: 35px; 
+        }
+        .product-card { 
+            background: #fff; 
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+        }
+        .product-header {
+            padding: 40px;
+            text-align: center;
             color: #fff;
-            padding: 0.75rem 2rem;
-            border-radius: 9999px;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s;
         }
-        .lemonsqueezy-button:hover {
-            background: #333;
-            transform: scale(1.05);
+        .product-header.obra { background: linear-gradient(135deg, #635BFF 0%, #8B5CF6 100%); }
+        .product-header.lutema { background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%); }
+        .product-header.poezine { background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%); }
+        .product-header.volume { background: linear-gradient(135deg, #1a1a1a 0%, #4a4a4a 100%); }
+        
+        .product-header h3 {
+            font-size: 28px;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+        .product-header .subtitle {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.9;
+        }
+        
+        .product-content { padding: 35px; }
+        .product-content ul {
+            list-style: none;
+            margin: 25px 0;
+        }
+        .product-content li {
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+            font-size: 14px;
+            color: #555;
+        }
+        .product-content li:before {
+            content: "— ";
+            color: #635BFF;
+            margin-right: 10px;
+        }
+        
+        .price-row {
+            display: flex;
+            align-items: baseline;
+            gap: 15px;
+            margin: 25px 0;
+        }
+        .price { font-size: 36px; font-weight: 600; }
+        .price-old { 
+            font-size: 18px; 
+            color: #999; 
+            text-decoration: line-through;
+        }
+        
+        /* Stats */
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+        .stat {
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 48px;
+            font-weight: 300;
+            color: #635BFF;
+        }
+        .stat-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #888;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+        
+        /* Trust Badges Stripe */
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        .trust-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: #666;
+        }
+        .trust-badge svg {
+            width: 20px;
+            height: 20px;
+            color: #635BFF;
+        }
+        
+        /* Formas de Pagamento */
+        .payment-methods {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .payment-methods p {
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .payment-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            font-size: 24px;
+        }
+        
+        /* Footer */
+        footer { 
+            background: #0a0a0a; 
+            color: #fff; 
+            text-align: center; 
+            padding: 80px 20px;
+        }
+        footer .logo { 
+            font-size: 32px; 
+            margin-bottom: 20px;
+            color: #635BFF;
+        }
+        footer p { 
+            color: #666; 
+            font-size: 14px;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+        
+        /* Mobile */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero h1 { font-size: 36px; }
+            .poem-preview { padding: 25px; }
+            .stats { gap: 30px; }
         }
     </style>
 </head>
-<body class="antialiased">
+<body>
 
-    <!-- Navigation -->
-    <nav class="fixed w-full z-50 top-0 bg-white/90 backdrop-blur-md shadow-sm" id="navbar">
-        <div class="max-w-7xl mx-auto px-6 py-4">
-            <div class="flex justify-between items-center">
-                <a href="#" class="font-serif text-2xl font-bold">Versos & Algoritmos</a>
-                <div class="hidden md:flex space-x-8">
-                    <a href="#poemas" class="text-sm uppercase tracking-widest hover:text-yellow-600">Poemas</a>
-                    <a href="#ebooks" class="text-sm uppercase tracking-widest hover:text-yellow-600">E-books</a>
-                    <a href="#sobre" class="text-sm uppercase tracking-widest hover:text-yellow-600">Sobre</a>
-                </div>
+    <!-- Navegação -->
+    <nav>
+        <div class="container nav-flex">
+            <div class="logo">Versos & Algoritmos</div>
+            <div class="nav-links">
+                <a href="#poemas">Poemas</a>
+                <a href="#obra">Obra Completa</a>
+                <a href="#volumes">Volumes</a>
+                <a href="#sobre">Sobre</a>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="min-h-screen flex items-center justify-center pt-20 px-6">
-        <div class="max-w-4xl mx-auto text-center">
-            <h1 class="font-serif text-5xl md:text-7xl font-light mb-6">
+    <!-- Hero -->
+    <section class="hero">
+        <div>
+            <div class="subtitle">Poesia Contemporânea Brasileira</div>
+            <h1>
                 Onde as palavras<br>
-                <span class="italic text-yellow-600">encontram</span> visões
+                <span class="destaque">encontram</span> visões
             </h1>
-            <p class="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
-                Uma coleção de poemas originais ilustrados por inteligência artificial.
-            </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="#ebooks" class="lemonsqueezy-button">
-                    Adquirir E-books
-                </a>
-                <a href="#poemas" class="px-8 py-3 border border-black rounded-full hover:bg-black hover:text-white transition">
-                    Ler Online
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Featured Poem -->
-    <section id="poema-destaque" class="py-20 bg-white">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div>
-                    <span class="text-yellow-600 text-sm uppercase tracking-widest mb-4 block">Destaque</span>
-                    <h2 class="font-serif text-4xl mb-6">Silêncios Digitais</h2>
-                    <p class="text-gray-600 font-serif italic text-lg leading-relaxed mb-6">
-                        No espaço entre um bit e outro,<br>
-                        habita o eco do que não foi dito.<br>
-                        Algoritmos sonham em poesia...
-                    </p>
-                    <button onclick="showFullPoem()" class="text-sm uppercase tracking-widest border-b-2 border-black pb-1 hover:text-yellow-600">
-                        Ler completo
-                    </button>
+            <p>64 poemas que navegam entre o amor, a existência, a resistência social e a transcendência. Pagamento seguro via Stripe com PIX, cartão e boleto.</p>
+            <a href="#obra" class="btn">Adquirir Obra Completa</a>
+            <a href="#poemas" class="btn btn-dark">Ler Poemas Grátis</a>
+            
+            <div class="trust-badges">
+                <div class="trust-badge">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    PIX Instantâneo
                 </div>
-                <div class="aspect-[3/4] rounded-lg overflow-hidden shadow-xl">
-                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800" 
-                         alt="Arte digital" class="w-full h-full object-cover hover:scale-110 transition duration-700">
+                <div class="trust-badge">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                    Compra Segura
+                </div>
+                <div class="trust-badge">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                    Download Imediato
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- E-books Store -->
-    <section id="ebooks" class="py-20 bg-yellow-50">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="font-serif text-4xl mb-4">E-books Disponíveis</h2>
-                <p class="text-gray-600">Download imediato após pagamento</p>
+    <!-- Stats -->
+    <section style="padding: 60px 20px; background: #fff;">
+        <div class="container">
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-number">64</div>
+                    <div class="stat-label">Poemas</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">4</div>
+                    <div class="stat-label">Capítulos</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">15+</div>
+                    <div class="stat-label">Anos de Escrita</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">3.99%</div>
+                    <div class="stat-label">Taxa Stripe</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Amostras de Poemas -->
+    <section id="poemas" class="bg-cream">
+        <div class="container">
+            <h2>Amostras da Obra</h2>
+            <p class="section-subtitle">Trechos selecionados de cada capítulo</p>
+            
+            <div class="poem-preview">
+                <span class="tag">Capítulo I — Amor & Desejo</span>
+                <h4>Dia de visita (Soneto-Convite)</h4>
+                <div class="verses">
+                    "Hoje meus versos terão visita<br>
+                    Por isso, caprichei bem na escrita<br>
+                    Para poder apresentá-los<br>
+                    A quem a eles fizer visita..."
+                </div>
             </div>
 
-            <!-- Bundle Destaque -->
-            <div class="mb-12 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-3xl p-1">
-                <div class="bg-white rounded-[22px] p-8 md:p-12">
-                    <div class="grid md:grid-cols-2 gap-8 items-center">
+            <div class="poem-preview">
+                <span class="tag">Capítulo II — Existência</span>
+                <h4>Sonho sonhado</h4>
+                <div class="verses">
+                    "Uma vez sonhei que com a felicidade havia encontrado,<br>
+                    Pois levei um grande susto quando olhei para o lado,<br>
+                    Vendo semi-nua a mulher com quem estava casado..."
+                </div>
+            </div>
+
+            <div class="poem-preview">
+                <span class="tag" style="background: #dc2626; color: #fff;">Capítulo III — Lutemas</span>
+                <h4>O mal do capital</h4>
+                <div class="verses">
+                    "O que é um ser humano<br>
+                    Perante este nosso formigueiro<br>
+                    Num mundo cada vez mais insano<br>
+                    E que não tem nada de verdadeiro..."
+                </div>
+            </div>
+
+            <div class="poem-preview">
+                <span class="tag">Capítulo IV — Natureza</span>
+                <h4>Velha infância</h4>
+                <div class="verses">
+                    "Às vezes me acho tão velho<br>
+                    Às vezes me vejo tão novo<br>
+                    Às vezes me encontro criança<br>
+                    E às vezes, tão velho de novo..."
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- OBRA COMPLETA - STRIPE -->
+    <section id="obra" class="bg-white">
+        <div class="container" style="max-width: 900px;">
+            <h2>Obra Completa</h2>
+            <p class="section-subtitle">Edição Definitiva • 64 Poemas • PDF + Imagens</p>
+            
+            <div class="product-card" style="border: 3px solid #635BFF;">
+                <div class="product-header obra">
+                    <div class="subtitle">Mais Popular</div>
+                    <h3>Versos & Algoritmos</h3>
+                    <div style="font-size: 14px; margin-top: 15px; opacity: 0.9;">
+                        Todos os 64 poemas organizados em 4 capítulos temáticos
+                    </div>
+                </div>
+                <div class="product-content" style="text-align: center;">
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin: 30px 0; text-align: left;">
                         <div>
-                            <span class="inline-block bg-green-100 text-green-800 text-xs font-bold px-3 py-1 rounded-full mb-4">
-                                ECONOMIZE R$ 14,80
-                            </span>
-                            <h3 class="font-serif text-3xl mb-4">Coleção Completa</h3>
-                            <p class="text-gray-600 mb-6">3 volumes + 5 poemas bônus + artes em 4K</p>
-                            <ul class="space-y-2 mb-6 text-sm text-gray-600">
-                                <li>✓ 75 poemas completos</li>
-                                <li>✓ 50+ imagens em alta resolução</li>
-                                <li>✓ Acesso vitalício</li>
-                            </ul>
-                            <div class="flex items-baseline gap-3 mb-6">
-                                <span class="text-4xl font-serif font-bold">R$ 49,90</span>
-                                <span class="text-gray-400 line-through">R$ 64,70</span>
-                            </div>
-                            <a href="https://SEU-LINK-BUNDLE.lemonsqueezy.com" 
-                               class="lemonsqueezy-button text-lg"
-                               data-overlay="true">
-                                Comprar Coleção
-                            </a>
+                            <strong style="color: #635BFF;">CAPÍTULO I</strong><br>
+                            <small>Amor & Desejo<br>18 poemas</small>
                         </div>
-                        <div class="flex justify-center gap-4">
-                            <div class="w-24 h-36 bg-gray-800 rounded shadow-lg"></div>
-                            <div class="w-24 h-36 bg-yellow-700 rounded shadow-lg -mt-4"></div>
-                            <div class="w-24 h-36 bg-green-900 rounded shadow-lg"></div>
+                        <div>
+                            <strong style="color: #635BFF;">CAPÍTULO II</strong><br>
+                            <small>Existência & Consciência<br>16 poemas</small>
                         </div>
+                        <div>
+                            <strong style="color: #635BFF;">CAPÍTULO III</strong><br>
+                            <small>Resistência & Sociedade<br>15 poemas</small>
+                        </div>
+                        <div>
+                            <strong style="color: #635BFF;">CAPÍTULO IV</strong><br>
+                            <small>Natureza & Transcendência<br>15 poemas</small>
+                        </div>
+                    </div>
+                    
+                    <ul style="text-align: left; max-width: 400px; margin: 0 auto;">
+                        <li>PDF otimizado para leitura digital</li>
+                        <li>4 ilustrações exclusivas geradas por IA</li>
+                        <li>Índice interativo por capítulos</li>
+                        <li>Versão para impressão A5</li>
+                        <li>Arquivos em alta resolução</li>
+                    </ul>
+                    
+                    <div class="price-row" style="justify-content: center;">
+                        <span class="price">R$ 39,90</span>
+                        <span class="price-old">R$ 59,90</span>
+                    </div>
+                    
+                    <!-- BOTÃO STRIPE - OBRA COMPLETA -->
+                    <a href="https://buy.stripe.com/SEU-LINK-OBRA-COMPLETA" class="btn" style="font-size: 16px; padding: 20px 50px;">
+                        Comprar com Stripe
+                    </a>
+                    
+                    <div class="payment-methods">
+                        <p>Formas de pagamento</p>
+                        <div class="payment-icons">
+                            💳 🏦 📱
+                        </div>
+                        <small style="color: #888;">Cartão • PIX • Boleto • Apple Pay</small>
+                    </div>
+                    
+                    <p style="font-size: 12px; color: #888; margin-top: 20px;">
+                        Download imediato após confirmação • Acesso vitalício • Garantia 7 dias
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VOLUMES INDIVIDUAIS - STRIPE -->
+    <section id="volumes" class="bg-cream">
+        <div class="container">
+            <h2>Volumes Individuais</h2>
+            <p class="section-subtitle">Adquira separadamente ou economize no bundle</p>
+            
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="product-header volume">
+                        <div class="subtitle">Volume I</div>
+                        <h3>Silêncios Binários</h3>
+                    </div>
+                    <div class="product-content">
+                        <p style="font-size: 14px; color: #666; margin-bottom: 20px;">
+                            25 poemas sobre a vida digital, solidão contemporânea e a beleza nos códigos.
+                        </p>
+                        <ul>
+                            <li>Dia de visita</li>
+                            <li>Sonho sonhado</li>
+                            <li>Um mistério</li>
+                            <li>Rimas</li>
+                            <li>+ 21 poemas</li>
+                        </ul>
+                        <div class="price" style="font-size: 28px; margin: 20px 0;">R$ 19,90</div>
+                        <!-- BOTÃO STRIPE - VOL 1 -->
+                        <a href="https://buy.stripe.com/SEU-LINK-VOL1" class="btn btn-small" style="width: 100%; text-align: center;">
+                            Comprar Volume I
+                        </a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-header volume" style="background: linear-gradient(135deg, #d4af37 0%, #b8860b 100%);">
+                        <div class="subtitle">Volume II</div>
+                        <h3>Algoritmos do Amor</h3>
+                    </div>
+                    <div class="product-content">
+                        <p style="font-size: 14px; color: #666; margin-bottom: 20px;">
+                            30 poemas explorando conexões humanas na era digital. O mais vendido.
+                        </p>
+                        <ul>
+                            <li>Coisas do coração</li>
+                            <li>Amor de madrugada</li>
+                            <li>À Lua / Luar</li>
+                            <li>Amado amante</li>
+                            <li>+ 26 poemas</li>
+                        </ul>
+                        <div class="price" style="font-size: 28px; margin: 20px 0;">R$ 24,90</div>
+                        <!-- BOTÃO STRIPE - VOL 2 -->
+                        <a href="https://buy.stripe.com/SEU-LINK-VOL2" class="btn btn-small" style="width: 100%; text-align: center;">
+                            Comprar Volume II
+                        </a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-header volume" style="background: linear-gradient(135deg, #059669 0%, #047857 100%);">
+                        <div class="subtitle">Volume III</div>
+                        <h3>Natureza Compilada</h3>
+                    </div>
+                    <div class="product-content">
+                        <p style="font-size: 14px; color: #666; margin-bottom: 20px;">
+                            20 poemas revisitando a natureza através da lente tecnológica.
+                        </p>
+                        <ul>
+                            <li>Velha infância</li>
+                            <li>Fruta do dia</li>
+                            <li>Água em movimento</li>
+                            <li>"OM"</li>
+                            <li>+ 16 poemas</li>
+                        </ul>
+                        <div class="price" style="font-size: 28px; margin: 20px 0;">R$ 19,90</div>
+                        <!-- BOTÃO STRIPE - VOL 3 -->
+                        <a href="https://buy.stripe.com/SEU-LINK-VOL3" class="btn btn-small" style="width: 100%; text-align: center;">
+                            Comprar Volume III
+                        </a>
                     </div>
                 </div>
             </div>
-
-            <!-- Produtos Individuais -->
-            <div class="grid md:grid-cols-3 gap-8">
-                <!-- Vol 1 -->
-                <div class="bg-white rounded-2xl p-6 shadow-lg text-center">
-                    <div class="w-32 h-48 bg-gradient-to-br from-gray-800 to-gray-600 rounded-lg mx-auto mb-4 shadow-xl flex items-center justify-center text-white font-serif">
-                        Vol. I
-                    </div>
-                    <h3 class="font-serif text-xl mb-2">Silêncios Binários</h3>
-                    <p class="text-gray-600 text-sm mb-4">25 poemas digitais</p>
-                    <p class="text-2xl font-serif font-bold mb-4">R$ 19,90</p>
-                    <a href="https://SEU-LINK-VOL1.lemonsqueezy.com" 
-                       class="lemonsqueezy-button text-sm"
-                       data-overlay="true">
-                        Comprar
-                    </a>
-                </div>
-
-                <!-- Vol 2 -->
-                <div class="bg-white rounded-2xl p-6 shadow-lg text-center">
-                    <div class="w-32 h-48 bg-gradient-to-br from-yellow-600 to-yellow-800 rounded-lg mx-auto mb-4 shadow-xl flex items-center justify-center text-white font-serif">
-                        Vol. II
-                    </div>
-                    <h3 class="font-serif text-xl mb-2">Algoritmos do Amor</h3>
-                    <p class="text-gray-600 text-sm mb-4">30 poemas</p>
-                    <p class="text-2xl font-serif font-bold mb-4">R$ 24,90</p>
-                    <a href="https://SEU-LINK-VOL2.lemonsqueezy.com" 
-                       class="lemonsqueezy-button text-sm"
-                       data-overlay="true">
-                        Comprar
-                    </a>
-                </div>
-
-                <!-- Vol 3 -->
-                <div class="bg-white rounded-2xl p-6 shadow-lg text-center">
-                    <div class="w-32 h-48 bg-gradient-to-br from-green-800 to-teal-900 rounded-lg mx-auto mb-4 shadow-xl flex items-center justify-center text-white font-serif">
-                        Vol. III
-                    </div>
-                    <h3 class="font-serif text-xl mb-2">Natureza Compilada</h3>
-                    <p class="text-gray-600 text-sm mb-4">20 poemas</p>
-                    <p class="text-2xl font-serif font-bold mb-4">R$ 19,90</p>
-                    <a href="https://SEU-LINK-VOL3.lemonsqueezy.com" 
-                       class="lemonsqueezy-button text-sm"
-                       data-overlay="true">
-                        Comprar
+            
+            <!-- Bundle -->
+            <div style="text-align: center; margin-top: 50px;">
+                <div style="background: #fff; padding: 40px; border-radius: 12px; display: inline-block; box-shadow: 0 10px 40px rgba(0,0,0,0.1); border: 2px solid #635BFF;">
+                    <h4 style="font-style: italic; margin-bottom: 10px; font-size: 24px;">Coleção Completa</h4>
+                    <p style="color: #666; font-size: 14px; margin-bottom: 15px;">3 volumes + material bônus</p>
+                    <p style="font-size: 42px; font-weight: 600; color: #635BFF; margin-bottom: 5px;">R$ 49,90</p>
+                    <p style="font-size: 14px; color: #999; text-decoration: line-through; margin-bottom: 20px;">R$ 64,70 separados</p>
+                    <p style="font-size: 13px; color: #22c55e; margin-bottom: 20px;">✓ Economize R$ 14,80</p>
+                    <!-- BOTÃO STRIPE - BUNDLE -->
+                    <a href="https://buy.stripe.com/SEU-LINK-BUNDLE" class="btn" style="font-size: 14px;">
+                        Comprar Coleção
                     </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Como Funciona -->
-    <section class="py-16 bg-white">
-        <div class="max-w-4xl mx-auto px-6">
-            <h3 class="font-serif text-2xl text-center mb-12">Como funciona</h3>
-            <div class="grid md:grid-cols-3 gap-8 text-center">
-                <div>
-                    <div class="w-12 h-12 bg-black text-white rounded-full flex items-center justify-center mx-auto mb-4 text-xl">1</div>
-                    <h4 class="font-medium mb-2">Escolha</h4>
-                    <p class="text-sm text-gray-600">Selecione o e-book ou coleção</p>
-                </div>
-                <div>
-                    <div class="w-12 h-12 bg-black text-white rounded-full flex items-center justify-center mx-auto mb-4 text-xl">2</div>
-                    <h4 class="font-medium mb-2">Pague</h4>
-                    <p class="text-sm text-gray-600">Cartão, PIX ou PayPal</p>
-                </div>
-                <div>
-                    <div class="w-12 h-12 bg-black text-white rounded-full flex items-center justify-center mx-auto mb-4 text-xl">3</div>
-                    <h4 class="font-medium mb-2">Receba</h4>
-                    <p class="text-sm text-gray-600">Download imediato no e-mail</p>
-                </div>
-            </div>
+    <!-- Sobre -->
+    <section id="sobre" class="bg-dark">
+        <div class="container" style="max-width: 800px; text-align: center;">
+            <h2 style="color: #635BFF;">Sobre a Obra</h2>
+            <p style="color: #aaa; margin-bottom: 40px; line-height: 1.8;">
+                "Versos & Algoritmos" reúne mais de 15 anos de escrita poética, organizados em uma 
+                arquitetura temática que dialoga com as grandes questões humanas: o amor como força 
+                motriz, a existência como mistério, a resistência como necessidade ética, e a natureza 
+                como caminho de transcendência.
+            </p>
+            <p style="color: #888; font-size: 14px;">
+                Pagamento processado com segurança pela Stripe. 
+                Aceitamos PIX, cartões, boleto e carteiras digitais.
+            </p>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-black text-white py-12">
-        <div class="max-w-7xl mx-auto px-6 text-center">
-            <div class="font-serif text-2xl mb-4">Versos & Algoritmos</div>
-            <p class="text-gray-400 text-sm">© 2024 Todos os direitos reservados</p>
-        </div>
+    <footer>
+        <div class="logo">Versos & Algoritmos</div>
+        <p>Poesia • Resistência • Transcendência</p>
+        <p style="margin-top: 30px; font-size: 12px;">
+            © 2024 • Todos os direitos reservados<br>
+            Pagamentos seguros por Stripe
+        </p>
     </footer>
 
-    <!-- Modal Simples -->
-    <div id="poemModal" class="fixed inset-0 bg-black/80 hidden items-center justify-center p-4 z-50">
-        <div class="bg-white max-w-2xl w-full rounded-2xl p-8 relative">
-            <button onclick="closePoem()" class="absolute top-4 right-4 text-2xl">&times;</button>
-            <div id="poemText" class="font-serif text-xl text-center py-8"></div>
-        </div>
-    </div>
-
-    <script>
-        // Inicializar ícones
-        lucide.createIcons();
-
-        // Mostrar poema completo
-        function showFullPoem() {
-            const modal = document.getElementById('poemModal');
-            const text = document.getElementById('poemText');
-            text.innerHTML = `
-                <h2 class="text-3xl mb-8">Silêncios Digitais</h2>
-                <div class="space-y-4 text-gray-700">
-                    <p>No espaço entre um bit e outro,</p>
-                    <p>habita o eco do que não foi dito.</p>
-                    <p>Algoritmos sonham em poesia,</p>
-                    <p>enquanto eu digito versos solitários</p>
-                    <p>na madrugada iluminada por pixels.</p>
-                    <br>
-                    <p>O vento não entra pela janela,</p>
-                    <p>mas o fan do processador</p>
-                    <p>sussurra segredos de um mundo</p>
-                    <p>que existe apenas em código.</p>
-                </div>
-            `;
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        }
-
-        function closePoem() {
-            const modal = document.getElementById('poemModal');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        }
-
-        // Fechar modal ao clicar fora
-        document.getElementById('poemModal').addEventListener('click', function(e) {
-            if (e.target === this) closePoem();
-        });
-
-        // Animação suave ao scroll
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
-    </script>
 </body>
 </html>
+        
