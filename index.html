@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Versos & Algoritmos | Poesia de [Seu Nome]</title>
+    <title>Versos & Algoritmos | Xico FaLô!</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
@@ -92,7 +92,7 @@
         .btn { 
             display: inline-block; 
             padding: 18px 45px; 
-            background: #635BFF; /* Cor oficial Stripe */
+            background: #635BFF; 
             color: #fff; 
             text-decoration: none; 
             border-radius: 50px;
@@ -201,9 +201,7 @@
             color: #fff;
         }
         .product-header.obra { background: linear-gradient(135deg, #635BFF 0%, #8B5CF6 100%); }
-        .product-header.lutema { background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%); }
-        .product-header.poezine { background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%); }
-        .product-header.volume { background: linear-gradient(135deg, #1a1a1a 0%, #4a4a4a 100%); }
+        .product-header.poezine { background: linear-gradient(135deg, #1a1a2e 0%, #4a4a4a 100%); }
         
         .product-header h3 {
             font-size: 28px;
@@ -247,31 +245,7 @@
             text-decoration: line-through;
         }
         
-        /* Stats */
-        .stats {
-            display: flex;
-            justify-content: center;
-            gap: 60px;
-            margin: 40px 0;
-            flex-wrap: wrap;
-        }
-        .stat {
-            text-align: center;
-        }
-        .stat-number {
-            font-size: 48px;
-            font-weight: 300;
-            color: #635BFF;
-        }
-        .stat-label {
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: #888;
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-        }
-        
-        /* Trust Badges Stripe */
+        /* Trust Badges */
         .trust-badges {
             display: flex;
             justify-content: center;
@@ -286,13 +260,8 @@
             font-size: 13px;
             color: #666;
         }
-        .trust-badge svg {
-            width: 20px;
-            height: 20px;
-            color: #635BFF;
-        }
         
-        /* Formas de Pagamento */
+        /* Payment Methods */
         .payment-methods {
             background: #f9f9f9;
             padding: 20px;
@@ -306,12 +275,6 @@
             margin-bottom: 10px;
             text-transform: uppercase;
             letter-spacing: 1px;
-        }
-        .payment-icons {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            font-size: 24px;
         }
         
         /* Footer */
@@ -336,8 +299,6 @@
         @media (max-width: 768px) {
             .nav-links { display: none; }
             .hero h1 { font-size: 36px; }
-            .poem-preview { padding: 25px; }
-            .stats { gap: 30px; }
         }
     </style>
 </head>
@@ -349,8 +310,7 @@
             <div class="logo">Versos & Algoritmos</div>
             <div class="nav-links">
                 <a href="#poemas">Poemas</a>
-                <a href="#obra">Obra Completa</a>
-                <a href="#volumes">Volumes</a>
+                <a href="#poezines">Poezines</a>
                 <a href="#sobre">Sobre</a>
             </div>
         </div>
@@ -364,23 +324,14 @@
                 Onde as palavras<br>
                 <span class="destaque">encontram</span> visões
             </h1>
-            <p>64 poemas que navegam entre o amor, a existência, a resistência social e a transcendência. Pagamento seguro via Stripe com PIX, cartão e boleto.</p>
-            <a href="#obra" class="btn">Adquirir Obra Completa</a>
-            <a href="#poemas" class="btn btn-dark">Ler Poemas Grátis</a>
+            <p>Poesia, poezines e literatura de Xico FaLô! Pagamento seguro via Stripe com PIX, cartão e boleto.</p>
+            <a href="#poezines" class="btn">Ver Poezines</a>
+            <a href="#poemas" class="btn btn-dark">Ler Online</a>
             
             <div class="trust-badges">
-                <div class="trust-badge">
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                    PIX Instantâneo
-                </div>
-                <div class="trust-badge">
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
-                    Compra Segura
-                </div>
-                <div class="trust-badge">
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                    Download Imediato
-                </div>
+                <div class="trust-badge">✓ PIX Instantâneo</div>
+                <div class="trust-badge">✓ Compra Segura</div>
+                <div class="trust-badge">✓ Download Imediato</div>
             </div>
         </div>
     </section>
@@ -388,22 +339,18 @@
     <!-- Stats -->
     <section style="padding: 60px 20px; background: #fff;">
         <div class="container">
-            <div class="stats">
-                <div class="stat">
-                    <div class="stat-number">64</div>
-                    <div class="stat-label">Poemas</div>
+            <div style="display: flex; justify-content: center; gap: 60px; flex-wrap: wrap;">
+                <div style="text-align: center;">
+                    <div style="font-size: 48px; font-weight: 300; color: #635BFF;">64+</div>
+                    <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 2px; color: #888;">Poemas</div>
                 </div>
-                <div class="stat">
-                    <div class="stat-number">4</div>
-                    <div class="stat-label">Capítulos</div>
+                <div style="text-align: center;">
+                    <div style="font-size: 48px; font-weight: 300; color: #635BFF;">6</div>
+                    <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 2px; color: #888;">Poezines</div>
                 </div>
-                <div class="stat">
-                    <div class="stat-number">15+</div>
-                    <div class="stat-label">Anos de Escrita</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-number">3.99%</div>
-                    <div class="stat-label">Taxa Stripe</div>
+                <div style="text-align: center;">
+                    <div style="font-size: 48px; font-weight: 300; color: #635BFF;">15+</div>
+                    <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 2px; color: #888;">Anos</div>
                 </div>
             </div>
         </div>
@@ -412,215 +359,107 @@
     <!-- Amostras de Poemas -->
     <section id="poemas" class="bg-cream">
         <div class="container">
-            <h2>Amostras da Obra</h2>
-            <p class="section-subtitle">Trechos selecionados de cada capítulo</p>
+            <h2>Amostras</h2>
+            <p class="section-subtitle">Trechos da obra de Xico FaLô!</p>
             
             <div class="poem-preview">
-                <span class="tag">Capítulo I — Amor & Desejo</span>
-                <h4>Dia de visita (Soneto-Convite)</h4>
+                <span class="tag">Boemia</span>
+                <h4>Boemia</h4>
                 <div class="verses">
-                    "Hoje meus versos terão visita<br>
-                    Por isso, caprichei bem na escrita<br>
-                    Para poder apresentá-los<br>
-                    A quem a eles fizer visita..."
+                    "Minha única companhia<br>
+                    É a perturbante solidão,<br>
+                    Que me consola todo dia<br>
+                    Com sua límpida escuridão."
                 </div>
             </div>
 
             <div class="poem-preview">
-                <span class="tag">Capítulo II — Existência</span>
-                <h4>Sonho sonhado</h4>
+                <span class="tag">Amor</span>
+                <h4>Amor de madrugada</h4>
                 <div class="verses">
-                    "Uma vez sonhei que com a felicidade havia encontrado,<br>
-                    Pois levei um grande susto quando olhei para o lado,<br>
-                    Vendo semi-nua a mulher com quem estava casado..."
+                    "Sou exatamente o que queria<br>
+                    Enquanto eu lhe esperava<br>
+                    Não sabia que este dia<br>
+                    Nesta noite me presentearia<br>
+                    Com seu amor de madrugada"
                 </div>
             </div>
 
             <div class="poem-preview">
-                <span class="tag" style="background: #dc2626; color: #fff;">Capítulo III — Lutemas</span>
-                <h4>O mal do capital</h4>
+                <span class="tag" style="background: #dc2626; color: #fff;">Saudade</span>
+                <h4>Saudade I</h4>
                 <div class="verses">
-                    "O que é um ser humano<br>
-                    Perante este nosso formigueiro<br>
-                    Num mundo cada vez mais insano<br>
-                    E que não tem nada de verdadeiro..."
-                </div>
-            </div>
-
-            <div class="poem-preview">
-                <span class="tag">Capítulo IV — Natureza</span>
-                <h4>Velha infância</h4>
-                <div class="verses">
-                    "Às vezes me acho tão velho<br>
-                    Às vezes me vejo tão novo<br>
-                    Às vezes me encontro criança<br>
-                    E às vezes, tão velho de novo..."
+                    "Quando se perde alguém<br>
+                    Que ainda se pode encontrar<br>
+                    Me faz pensar<br>
+                    Em logo te assassinar<br>
+                    Pra não mais ser teu refém,<br>
+                    Maldita saudade!"
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- OBRA COMPLETA - STRIPE -->
-    <section id="obra" class="bg-white">
-        <div class="container" style="max-width: 900px;">
-            <h2>Obra Completa</h2>
-            <p class="section-subtitle">Edição Definitiva • 64 Poemas • PDF + Imagens</p>
+    <!-- POEZINES -->
+    <section id="poezines" class="bg-white">
+        <div class="container">
+            <h2>Poezines</h2>
+            <p class="section-subtitle">Edições independentes em formato digital</p>
             
-            <div class="product-card" style="border: 3px solid #635BFF;">
-                <div class="product-header obra">
-                    <div class="subtitle">Mais Popular</div>
-                    <h3>Versos & Algoritmos</h3>
+            <!-- POEZINE #01 - BOHEMIA -->
+            <div class="product-card" style="max-width: 600px; margin: 0 auto 40px; border: 3px solid #635BFF;">
+                <div class="product-header poezine">
+                    <div class="subtitle">Edição Digital</div>
+                    <h3>Poezine #01 — Bohemia</h3>
                     <div style="font-size: 14px; margin-top: 15px; opacity: 0.9;">
-                        Todos os 64 poemas organizados em 4 capítulos temáticos
+                        Fã, zine • Fev/2016
                     </div>
                 </div>
                 <div class="product-content" style="text-align: center;">
-                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin: 30px 0; text-align: left;">
-                        <div>
-                            <strong style="color: #635BFF;">CAPÍTULO I</strong><br>
-                            <small>Amor & Desejo<br>18 poemas</small>
-                        </div>
-                        <div>
-                            <strong style="color: #635BFF;">CAPÍTULO II</strong><br>
-                            <small>Existência & Consciência<br>16 poemas</small>
-                        </div>
-                        <div>
-                            <strong style="color: #635BFF;">CAPÍTULO III</strong><br>
-                            <small>Resistência & Sociedade<br>15 poemas</small>
-                        </div>
-                        <div>
-                            <strong style="color: #635BFF;">CAPÍTULO IV</strong><br>
-                            <small>Natureza & Transcendência<br>15 poemas</small>
-                        </div>
-                    </div>
+                    <p style="color: #666; margin-bottom: 20px;">
+                        7 poemas sobre solidão, amor, saudade e sonhos. 
+                        Inclui: Boemia, Amor de madrugada, A falta, 
+                        Coisas do coração, Saudade I, Sonho sonhado e 
+                        Menina mulher (bônus).
+                    </p>
                     
-                    <ul style="text-align: left; max-width: 400px; margin: 0 auto;">
-                        <li>PDF otimizado para leitura digital</li>
-                        <li>4 ilustrações exclusivas geradas por IA</li>
-                        <li>Índice interativo por capítulos</li>
-                        <li>Versão para impressão A5</li>
-                        <li>Arquivos em alta resolução</li>
+                    <ul style="text-align: left; max-width: 300px; margin: 0 auto 30px;">
+                        <li>PDF formato A5 (11 páginas)</li>
+                        <li>Capa e contracapa originais</li>
+                        <li>Layout profissional para leitura</li>
+                        <li>Download imediato</li>
                     </ul>
                     
                     <div class="price-row" style="justify-content: center;">
-                        <span class="price">R$ 39,90</span>
-                        <span class="price-old">R$ 59,90</span>
+                        <span class="price">R$ 9,90</span>
                     </div>
                     
-                    <!-- BOTÃO STRIPE - OBRA COMPLETA -->
-                    <a href="https://buy.stripe.com/SEU-LINK-OBRA-COMPLETA" class="btn" style="font-size: 16px; padding: 20px 50px;">
-                        Comprar com Stripe
+                    <!-- SUBSTITUA PELO SEU LINK DA STRIPE -->
+                    <a href="https://buy.stripe.com/SEU-LINK-BOHEMIA" class="btn" style="font-size: 16px; padding: 20px 50px;">
+                        Comprar Agora
                     </a>
                     
                     <div class="payment-methods">
                         <p>Formas de pagamento</p>
-                        <div class="payment-icons">
-                            💳 🏦 📱
-                        </div>
-                        <small style="color: #888;">Cartão • PIX • Boleto • Apple Pay</small>
+                        <small style="color: #888;">💳 Cartão • 📱 PIX • 🏦 Boleto</small>
                     </div>
                     
                     <p style="font-size: 12px; color: #888; margin-top: 20px;">
-                        Download imediato após confirmação • Acesso vitalício • Garantia 7 dias
+                        Após a compra, você será redirecionado para a página de download
                     </p>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- VOLUMES INDIVIDUAIS - STRIPE -->
-    <section id="volumes" class="bg-cream">
-        <div class="container">
-            <h2>Volumes Individuais</h2>
-            <p class="section-subtitle">Adquira separadamente ou economize no bundle</p>
-            
-            <div class="product-grid">
-                <div class="product-card">
-                    <div class="product-header volume">
-                        <div class="subtitle">Volume I</div>
-                        <h3>Silêncios Binários</h3>
-                    </div>
-                    <div class="product-content">
-                        <p style="font-size: 14px; color: #666; margin-bottom: 20px;">
-                            25 poemas sobre a vida digital, solidão contemporânea e a beleza nos códigos.
-                        </p>
-                        <ul>
-                            <li>Dia de visita</li>
-                            <li>Sonho sonhado</li>
-                            <li>Um mistério</li>
-                            <li>Rimas</li>
-                            <li>+ 21 poemas</li>
-                        </ul>
-                        <div class="price" style="font-size: 28px; margin: 20px 0;">R$ 19,90</div>
-                        <!-- BOTÃO STRIPE - VOL 1 -->
-                        <a href="https://buy.stripe.com/SEU-LINK-VOL1" class="btn btn-small" style="width: 100%; text-align: center;">
-                            Comprar Volume I
-                        </a>
-                    </div>
-                </div>
-
-                <div class="product-card">
-                    <div class="product-header volume" style="background: linear-gradient(135deg, #d4af37 0%, #b8860b 100%);">
-                        <div class="subtitle">Volume II</div>
-                        <h3>Algoritmos do Amor</h3>
-                    </div>
-                    <div class="product-content">
-                        <p style="font-size: 14px; color: #666; margin-bottom: 20px;">
-                            30 poemas explorando conexões humanas na era digital. O mais vendido.
-                        </p>
-                        <ul>
-                            <li>Coisas do coração</li>
-                            <li>Amor de madrugada</li>
-                            <li>À Lua / Luar</li>
-                            <li>Amado amante</li>
-                            <li>+ 26 poemas</li>
-                        </ul>
-                        <div class="price" style="font-size: 28px; margin: 20px 0;">R$ 24,90</div>
-                        <!-- BOTÃO STRIPE - VOL 2 -->
-                        <a href="https://buy.stripe.com/SEU-LINK-VOL2" class="btn btn-small" style="width: 100%; text-align: center;">
-                            Comprar Volume II
-                        </a>
-                    </div>
-                </div>
-
-                <div class="product-card">
-                    <div class="product-header volume" style="background: linear-gradient(135deg, #059669 0%, #047857 100%);">
-                        <div class="subtitle">Volume III</div>
-                        <h3>Natureza Compilada</h3>
-                    </div>
-                    <div class="product-content">
-                        <p style="font-size: 14px; color: #666; margin-bottom: 20px;">
-                            20 poemas revisitando a natureza através da lente tecnológica.
-                        </p>
-                        <ul>
-                            <li>Velha infância</li>
-                            <li>Fruta do dia</li>
-                            <li>Água em movimento</li>
-                            <li>"OM"</li>
-                            <li>+ 16 poemas</li>
-                        </ul>
-                        <div class="price" style="font-size: 28px; margin: 20px 0;">R$ 19,90</div>
-                        <!-- BOTÃO STRIPE - VOL 3 -->
-                        <a href="https://buy.stripe.com/SEU-LINK-VOL3" class="btn btn-small" style="width: 100%; text-align: center;">
-                            Comprar Volume III
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Bundle -->
-            <div style="text-align: center; margin-top: 50px;">
-                <div style="background: #fff; padding: 40px; border-radius: 12px; display: inline-block; box-shadow: 0 10px 40px rgba(0,0,0,0.1); border: 2px solid #635BFF;">
-                    <h4 style="font-style: italic; margin-bottom: 10px; font-size: 24px;">Coleção Completa</h4>
-                    <p style="color: #666; font-size: 14px; margin-bottom: 15px;">3 volumes + material bônus</p>
-                    <p style="font-size: 42px; font-weight: 600; color: #635BFF; margin-bottom: 5px;">R$ 49,90</p>
-                    <p style="font-size: 14px; color: #999; text-decoration: line-through; margin-bottom: 20px;">R$ 64,70 separados</p>
-                    <p style="font-size: 13px; color: #22c55e; margin-bottom: 20px;">✓ Economize R$ 14,80</p>
-                    <!-- BOTÃO STRIPE - BUNDLE -->
-                    <a href="https://buy.stripe.com/SEU-LINK-BUNDLE" class="btn" style="font-size: 14px;">
-                        Comprar Coleção
-                    </a>
-                </div>
+            <!-- Futuros poezines -->
+            <div style="text-align: center; margin-top: 60px; padding: 40px; background: #f9f9f9; border-radius: 15px;">
+                <h3 style="font-style: italic; margin-bottom: 15px;">Em Breve</h3>
+                <p style="color: #666; margin-bottom: 20px;">
+                    Poezines #02 a #06 estarão disponíveis em breve.<br>
+                    Cadastre seu e-mail para ser notificado.
+                </p>
+                <p style="font-size: 14px; color: #888;">
+                    xicofalo@gmail.com
+                </p>
             </div>
         </div>
     </section>
@@ -628,16 +467,16 @@
     <!-- Sobre -->
     <section id="sobre" class="bg-dark">
         <div class="container" style="max-width: 800px; text-align: center;">
-            <h2 style="color: #635BFF;">Sobre a Obra</h2>
+            <h2 style="color: #635BFF;">Xico FaLô!</h2>
             <p style="color: #aaa; margin-bottom: 40px; line-height: 1.8;">
-                "Versos & Algoritmos" reúne mais de 15 anos de escrita poética, organizados em uma 
-                arquitetura temática que dialoga com as grandes questões humanas: o amor como força 
-                motriz, a existência como mistério, a resistência como necessidade ética, e a natureza 
-                como caminho de transcendência.
+                Poeta, escritor e compositor de Leme, interior de São Paulo. 
+                Graduado em Psicologia, trabalha com crianças e adolescentes autistas. 
+                A poesia começou aos 13 anos, quando uma professora de português 
+                despertou seu potencial criativo.
             </p>
             <p style="color: #888; font-size: 14px;">
-                Pagamento processado com segurança pela Stripe. 
-                Aceitamos PIX, cartões, boleto e carteiras digitais.
+                "A frieza do relógio não compete com a quentura do meu coração, 
+                coração que bate, 4x4, sem lógica, e sem nenhuma razão." — Raul Seixas
             </p>
         </div>
     </section>
@@ -645,10 +484,11 @@
     <!-- Footer -->
     <footer>
         <div class="logo">Versos & Algoritmos</div>
-        <p>Poesia • Resistência • Transcendência</p>
+        <p>Xico FaLô! • Poesia Independente</p>
         <p style="margin-top: 30px; font-size: 12px;">
             © 2024 • Todos os direitos reservados<br>
-            Pagamentos seguros por Stripe
+            xicofalo@gmail.com • (19) 99744-9677<br>
+            @poetaxicofalo
         </p>
     </footer>
 
