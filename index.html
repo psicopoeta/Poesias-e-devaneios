@@ -1,496 +1,964 @@
-<!DOCTYPE html>
+= '''<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Versos & Algoritmos | Xico FaLô!</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            font-family: 'Georgia', 'Times New Roman', serif; 
-            background: #f5f2ed; 
-            color: #1a1a1a;
-            line-height: 1.8;
-        }
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-        
-        /* Navegação */
-        nav { 
-            background: rgba(255,255,255,0.98); 
-            padding: 20px 0; 
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
-            border-bottom: 1px solid #e5e5e5;
-        }
-        .nav-flex { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-        }
-        .logo { 
-            font-size: 26px; 
-            font-weight: 400; 
-            font-style: italic;
-            letter-spacing: -0.5px;
-        }
-        .nav-links { display: flex; gap: 35px; }
-        .nav-links a { 
-            text-decoration: none; 
-            color: #444; 
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            transition: color 0.3s;
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-        }
-        .nav-links a:hover { color: #b8860b; }
-        
-        /* Hero */
-        .hero { 
-            min-height: 100vh; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            text-align: center;
-            padding: 120px 20px 80px;
-            background: linear-gradient(180deg, #f5f2ed 0%, #fff 100%);
-        }
-        .hero h1 { 
-            font-size: clamp(42px, 10vw, 84px); 
-            line-height: 1.05; 
-            margin-bottom: 25px;
-            font-weight: 400;
-            font-style: italic;
-            letter-spacing: -2px;
-        }
-        .hero .destaque { 
-            color: #b8860b; 
-            font-style: italic; 
-        }
-        .hero .subtitle {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            color: #888;
-            margin-bottom: 30px;
-        }
-        .hero p { 
-            font-size: 18px; 
-            color: #555; 
-            margin-bottom: 40px; 
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            font-weight: 300;
-        }
-        
-        /* Botões Stripe */
-        .btn { 
-            display: inline-block; 
-            padding: 18px 45px; 
-            background: #635BFF; 
-            color: #fff; 
-            text-decoration: none; 
-            border-radius: 50px;
-            margin: 8px;
-            transition: all 0.3s;
-            border: 2px solid #635BFF;
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            cursor: pointer;
-        }
-        .btn:hover { 
-            background: transparent; 
-            color: #635BFF; 
-        }
-        .btn-dark {
-            background: #1a1a1a;
-            border-color: #1a1a1a;
-        }
-        .btn-dark:hover {
-            background: transparent;
-            color: #1a1a1a;
-        }
-        .btn-small {
-            padding: 12px 30px;
-            font-size: 12px;
-        }
-        
-        /* Seções */
-        section { padding: 100px 20px; }
-        .bg-white { background: #fff; }
-        .bg-cream { background: #faf8f5; }
-        .bg-dark { 
-            background: #1a1a1a; 
-            color: #fff; 
-        }
-        
-        h2 { 
-            font-size: 48px; 
-            text-align: center; 
-            margin-bottom: 20px;
-            font-weight: 400;
-            font-style: italic;
-        }
-        .section-subtitle {
-            text-align: center;
-            color: #777;
-            margin-bottom: 60px;
-            font-size: 15px;
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-        }
-        
-        /* Poemas Preview */
-        .poem-preview {
-            background: #fff;
-            padding: 40px;
-            margin: 20px 0;
-            border-left: 4px solid #635BFF;
-            box-shadow: 0 5px 25px rgba(0,0,0,0.06);
-        }
-        .poem-preview h4 {
-            font-style: italic;
-            font-size: 24px;
-            margin-bottom: 15px;
-            color: #1a1a1a;
-        }
-        .poem-preview .verses {
-            font-style: italic;
-            color: #555;
-            line-height: 2;
-            margin-bottom: 15px;
-        }
-        .poem-preview .tag {
-            display: inline-block;
-            background: #f5f2ed;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #888;
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-        }
-        
-        /* Produtos */
-        .product-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
-            gap: 35px; 
-        }
-        .product-card { 
-            background: #fff; 
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .product-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.12);
-        }
-        .product-header {
-            padding: 40px;
-            text-align: center;
-            color: #fff;
-        }
-        .product-header.obra { background: linear-gradient(135deg, #635BFF 0%, #8B5CF6 100%); }
-        .product-header.poezine { background: linear-gradient(135deg, #1a1a2e 0%, #4a4a4a 100%); }
-        
-        .product-header h3 {
-            font-size: 28px;
-            font-style: italic;
-            margin-bottom: 10px;
-        }
-        .product-header .subtitle {
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            opacity: 0.9;
-        }
-        
-        .product-content { padding: 35px; }
-        .product-content ul {
-            list-style: none;
-            margin: 25px 0;
-        }
-        .product-content li {
-            padding: 12px 0;
-            border-bottom: 1px solid #eee;
-            font-size: 14px;
-            color: #555;
-        }
-        .product-content li:before {
-            content: "— ";
-            color: #635BFF;
-            margin-right: 10px;
-        }
-        
-        .price-row {
-            display: flex;
-            align-items: baseline;
-            gap: 15px;
-            margin: 25px 0;
-        }
-        .price { font-size: 36px; font-weight: 600; }
-        .price-old { 
-            font-size: 18px; 
-            color: #999; 
-            text-decoration: line-through;
-        }
-        
-        /* Trust Badges */
-        .trust-badges {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 30px;
-            flex-wrap: wrap;
-        }
-        .trust-badge {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 13px;
-            color: #666;
-        }
-        
-        /* Payment Methods */
-        .payment-methods {
-            background: #f9f9f9;
-            padding: 20px;
-            border-radius: 10px;
-            margin: 20px 0;
-            text-align: center;
-        }
-        .payment-methods p {
-            font-size: 12px;
-            color: #888;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        /* Footer */
-        footer { 
-            background: #0a0a0a; 
-            color: #fff; 
-            text-align: center; 
-            padding: 80px 20px;
-        }
-        footer .logo { 
-            font-size: 32px; 
-            margin-bottom: 20px;
-            color: #635BFF;
-        }
-        footer p { 
-            color: #666; 
-            font-size: 14px;
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-        }
-        
-        /* Mobile */
-        @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .hero h1 { font-size: 36px; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Xico FaLô! | Poesia Independente</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+font-family: 'Georgia', 'Times New Roman', serif;
+background: #f5f2ed;
+color: #1a1a1a;
+line-height: 1.8;
+}
+.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+nav {
+background: rgba(255,255,255,0.98);
+padding: 20px 0;
+position: fixed;
+width: 100%;
+top: 0;
+z-index: 100;
+box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+border-bottom: 1px solid #e5e5e5;
+}
+.nav-flex {
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+.logo {
+font-size: 26px;
+font-weight: 400;
+font-style: italic;
+letter-spacing: -0.5px;
+}
+.nav-links { display: flex; gap: 35px; }
+.nav-links a {
+text-decoration: none;
+color: #444;
+font-size: 13px;
+text-transform: uppercase;
+letter-spacing: 1.5px;
+transition: color 0.3s;
+font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+.nav-links a:hover { color: #b8860b; }
+
+.hero {
+min-height: 100vh;
+display: flex;
+align-items: center;
+justify-content: center;
+text-align: center;
+padding: 120px 20px 80px;
+background: linear-gradient(180deg, #f5f2ed 0%, #fff 100%);
+}
+.hero h1 {
+font-size: clamp(42px, 10vw, 84px);
+line-height: 1.05;
+margin-bottom: 25px;
+font-weight: 400;
+font-style: italic;
+letter-spacing: -2px;
+}
+.hero .destaque {
+color: #b8860b;
+font-style: italic;
+}
+.hero .subtitle {
+font-family: 'Helvetica Neue', Arial, sans-serif;
+font-size: 14px;
+text-transform: uppercase;
+letter-spacing: 3px;
+color: #888;
+margin-bottom: 30px;
+}
+.hero p {
+font-size: 18px;
+color: #555;
+margin-bottom: 40px;
+max-width: 600px;
+margin-left: auto;
+margin-right: auto;
+font-weight: 300;
+}
+
+.btn {
+display: inline-block;
+padding: 18px 45px;
+background: #635BFF;
+color: #fff;
+text-decoration: none;
+border-radius: 50px;
+margin: 8px;
+transition: all 0.3s;
+border: 2px solid #635BFF;
+font-family: 'Helvetica Neue', Arial, sans-serif;
+font-size: 13px;
+text-transform: uppercase;
+letter-spacing: 1.5px;
+cursor: pointer;
+}
+.btn:hover {
+background: transparent;
+color: #635BFF;
+}
+.btn-dark {
+background: #1a1a1a;
+border-color: #1a1a1a;
+}
+.btn-dark:hover {
+background: transparent;
+color: #1a1a1a;
+}
+
+section { padding: 100px 20px; }
+.bg-white { background: #fff; }
+.bg-cream { background: #faf8f5; }
+.bg-dark {
+background: #1a1a1a;
+color: #fff;
+}
+
+h2 {
+font-size: 48px;
+text-align: center;
+margin-bottom: 20px;
+font-weight: 400;
+font-style: italic;
+}
+.section-subtitle {
+text-align: center;
+color: #777;
+margin-bottom: 60px;
+font-size: 15px;
+font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+.about-grid {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 60px;
+align-items: start;
+}
+.about-text h3 {
+font-size: 28px;
+font-style: italic;
+margin-bottom: 20px;
+color: #b8860b;
+}
+.about-text p {
+margin-bottom: 15px;
+color: #555;
+line-height: 1.8;
+}
+.about-info {
+background: #fff;
+padding: 40px;
+border-radius: 12px;
+box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+}
+.about-info h4 {
+font-size: 18px;
+margin-bottom: 20px;
+text-transform: uppercase;
+letter-spacing: 2px;
+font-family: 'Helvetica Neue', Arial, sans-serif;
+color: #888;
+}
+.about-info ul {
+list-style: none;
+}
+.about-info li {
+padding: 12px 0;
+border-bottom: 1px solid #eee;
+font-size: 14px;
+color: #555;
+}
+.about-info li strong {
+color: #1a1a1a;
+display: block;
+margin-bottom: 3px;
+}
+
+.poem-preview {
+background: #fff;
+padding: 40px;
+margin: 20px 0;
+border-left: 4px solid #635BFF;
+box-shadow: 0 5px 25px rgba(0,0,0,0.06);
+border-radius: 0 12px 12px 0;
+}
+.poem-preview h4 {
+font-style: italic;
+font-size: 24px;
+margin-bottom: 15px;
+color: #1a1a1a;
+}
+.poem-preview .verses {
+font-style: italic;
+color: #555;
+line-height: 2;
+margin-bottom: 15px;
+white-space: pre-line;
+}
+.poem-preview .tag {
+display: inline-block;
+background: #f5f2ed;
+padding: 5px 15px;
+border-radius: 20px;
+font-size: 11px;
+text-transform: uppercase;
+letter-spacing: 1px;
+color: #888;
+font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+.product-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+gap: 35px;
+}
+.product-card {
+background: #fff;
+border-radius: 12px;
+overflow: hidden;
+box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+transition: transform 0.3s, box-shadow 0.3s;
+}
+.product-card:hover {
+transform: translateY(-8px);
+box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+}
+.product-header {
+padding: 40px;
+text-align: center;
+color: #fff;
+}
+.product-header.obra { background: linear-gradient(135deg, #635BFF 0%, #8B5CF6 100%); }
+.product-header.poezine { background: linear-gradient(135deg, #1a1a2e 0%, #4a4a4a 100%); }
+.product-header.lutema { background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%); }
+
+.product-header h3 {
+font-size: 28px;
+font-style: italic;
+margin-bottom: 10px;
+}
+.product-header .subtitle {
+font-size: 12px;
+text-transform: uppercase;
+letter-spacing: 2px;
+opacity: 0.9;
+}
+
+.product-content { padding: 35px; }
+.product-content ul {
+list-style: none;
+margin: 25px 0;
+}
+.product-content li {
+padding: 12px 0;
+border-bottom: 1px solid #eee;
+font-size: 14px;
+color: #555;
+}
+.product-content li:before {
+content: "— ";
+color: #635BFF;
+margin-right: 10px;
+}
+
+.price-row {
+display: flex;
+align-items: baseline;
+gap: 15px;
+margin: 25px 0;
+}
+.price { font-size: 36px; font-weight: 600; }
+.price-old {
+font-size: 18px;
+color: #999;
+text-decoration: line-through;
+}
+
+.trust-badges {
+display: flex;
+justify-content: center;
+gap: 30px;
+margin-top: 30px;
+flex-wrap: wrap;
+}
+.trust-badge {
+display: flex;
+align-items: center;
+gap: 8px;
+font-size: 13px;
+color: #666;
+}
+
+.payment-methods {
+background: #f9f9f9;
+padding: 20px;
+border-radius: 10px;
+margin: 20px 0;
+text-align: center;
+}
+.payment-methods p {
+font-size: 12px;
+color: #888;
+margin-bottom: 10px;
+text-transform: uppercase;
+letter-spacing: 1px;
+}
+
+.event-card {
+background: #fff;
+padding: 30px;
+margin: 15px 0;
+border-radius: 12px;
+box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+border-left: 4px solid #b8860b;
+}
+.event-card .date {
+font-size: 12px;
+text-transform: uppercase;
+letter-spacing: 2px;
+color: #b8860b;
+font-family: 'Helvetica Neue', Arial, sans-serif;
+margin-bottom: 8px;
+}
+.event-card h4 {
+font-size: 20px;
+font-style: italic;
+margin-bottom: 8px;
+}
+.event-card p {
+color: #666;
+font-size: 14px;
+}
+
+.trajetoria-list {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+gap: 25px;
+}
+.trajetoria-item {
+background: #fff;
+padding: 30px;
+border-radius: 12px;
+box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+.trajetoria-item h4 {
+font-size: 18px;
+font-style: italic;
+margin-bottom: 12px;
+color: #b8860b;
+}
+.trajetoria-item p {
+color: #555;
+font-size: 14px;
+line-height: 1.7;
+}
+
+footer {
+background: #0a0a0a;
+color: #fff;
+text-align: center;
+padding: 80px 20px;
+}
+footer .logo {
+font-size: 32px;
+margin-bottom: 20px;
+color: #635BFF;
+}
+footer p {
+color: #666;
+font-size: 14px;
+font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+@media (max-width: 768px) {
+.nav-links { display: none; }
+.hero h1 { font-size: 36px; }
+.about-grid { grid-template-columns: 1fr; }
+h2 { font-size: 32px; }
+}
+</style>
 </head>
 <body>
 
-    <!-- Navegação -->
-    <nav>
-        <div class="container nav-flex">
-            <div class="logo">Versos & Algoritmos</div>
-            <div class="nav-links">
-                <a href="#poemas">Poemas</a>
-                <a href="#poezines">Poezines</a>
-                <a href="#sobre">Sobre</a>
-            </div>
-        </div>
-    </nav>
+<nav>
+<div class="container nav-flex">
+<div class="logo">Xico FaLô!</div>
+<div class="nav-links">
+<a href="#sobre">Sobre</a>
+<a href="#poemas">Poemas</a>
+<a href="#poezines">Poezines</a>
+<a href="#lutemas">Lutemas</a>
+<a href="#obra">Obra Completa</a>
+<a href="#eventos">Eventos</a>
+</div>
+</div>
+</nav>
 
-    <!-- Hero -->
-    <section class="hero">
-        <div>
-            <div class="subtitle">Poesia Contemporânea Brasileira</div>
-            <h1>
-                Onde as palavras<br>
-                <span class="destaque">encontram</span> visões
-            </h1>
-            <p>Poesia, poezines e literatura de Xico FaLô! Pagamento seguro via Stripe com PIX, cartão e boleto.</p>
-            <a href="#poezines" class="btn">Ver Poezines</a>
-            <a href="#poemas" class="btn btn-dark">Ler Online</a>
-            
-            <div class="trust-badges">
-                <div class="trust-badge">✓ PIX Instantâneo</div>
-                <div class="trust-badge">✓ Compra Segura</div>
-                <div class="trust-badge">✓ Download Imediato</div>
-            </div>
-        </div>
-    </section>
+<section class="hero">
+<div>
+<div class="subtitle">Poeta Independente | Agente Cultural | Leme/SP</div>
+<h1>
+Xico<br>
+<span class="destaque">FaLô!</span>
+</h1>
+<p>Fábio Lopes Francisco — Poeta, escritor independente e agente cultural. Poesia como instrumento de expressão, reflexão e transformação social.</p>
+<a href="#poezines" class="btn">Ver Poezines</a>
+<a href="#poemas" class="btn btn-dark">Ler Online</a>
 
-    <!-- Stats -->
-    <section style="padding: 60px 20px; background: #fff;">
-        <div class="container">
-            <div style="display: flex; justify-content: center; gap: 60px; flex-wrap: wrap;">
-                <div style="text-align: center;">
-                    <div style="font-size: 48px; font-weight: 300; color: #635BFF;">64+</div>
-                    <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 2px; color: #888;">Poemas</div>
-                </div>
-                <div style="text-align: center;">
-                    <div style="font-size: 48px; font-weight: 300; color: #635BFF;">6</div>
-                    <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 2px; color: #888;">Poezines</div>
-                </div>
-                <div style="text-align: center;">
-                    <div style="font-size: 48px; font-weight: 300; color: #635BFF;">15+</div>
-                    <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 2px; color: #888;">Anos</div>
-                </div>
-            </div>
-        </div>
-    </section>
+<div class="trust-badges">
+<div class="trust-badge">✓ Poezines Artesanais</div>
+<div class="trust-badge">✓ Literatura Independente</div>
+<div class="trust-badge">✓ Poesia de Rua</div>
+</div>
+</div>
+</section>
 
-    <!-- Amostras de Poemas -->
-    <section id="poemas" class="bg-cream">
-        <div class="container">
-            <h2>Amostras</h2>
-            <p class="section-subtitle">Trechos da obra de Xico FaLô!</p>
-            
-            <div class="poem-preview">
-                <span class="tag">Boemia</span>
-                <h4>Boemia</h4>
-                <div class="verses">
-                    "Minha única companhia<br>
-                    É a perturbante solidão,<br>
-                    Que me consola todo dia<br>
-                    Com sua límpida escuridão."
-                </div>
-            </div>
+<section style="padding: 60px 20px; background: #fff;">
+<div class="container">
+<div style="display: flex; justify-content: center; gap: 60px; flex-wrap: wrap;">
+<div style="text-align: center;">
+<div style="font-size: 48px; font-weight: 300; color: #635BFF;">6</div>
+<div style="font-size: 12px; text-transform: uppercase; letter-spacing: 2px; color: #888;">Poezines</div>
+</div>
+<div style="text-align: center;">
+<div style="font-size: 48px; font-weight: 300; color: #635BFF;">42+</div>
+<div style="font-size: 12px; text-transform: uppercase; letter-spacing: 2px; color: #888;">Poemas</div>
+</div>
+<div style="text-align: center;">
+<div style="font-size: 48px; font-weight: 300; color: #635BFF;">15+</div>
+<div style="font-size: 12px; text-transform: uppercase; letter-spacing: 2px; color: #888;">Anos de Poesia</div>
+</div>
+<div style="text-align: center;">
+<div style="font-size: 48px; font-weight: 300; color: #635BFF;">1</div>
+<div style="font-size: 12px; text-transform: uppercase; letter-spacing: 2px; color: #888;">Obra Completa</div>
+</div>
+</div>
+</div>
+</section>
 
-            <div class="poem-preview">
-                <span class="tag">Amor</span>
-                <h4>Amor de madrugada</h4>
-                <div class="verses">
-                    "Sou exatamente o que queria<br>
-                    Enquanto eu lhe esperava<br>
-                    Não sabia que este dia<br>
-                    Nesta noite me presentearia<br>
-                    Com seu amor de madrugada"
-                </div>
-            </div>
+<section id="sobre" class="bg-cream">
+<div class="container">
+<h2>Sobre o Poeta</h2>
+<p class="section-subtitle">Fábio Lopes Francisco — Xico FaLô!</p>
 
-            <div class="poem-preview">
-                <span class="tag" style="background: #dc2626; color: #fff;">Saudade</span>
-                <h4>Saudade I</h4>
-                <div class="verses">
-                    "Quando se perde alguém<br>
-                    Que ainda se pode encontrar<br>
-                    Me faz pensar<br>
-                    Em logo te assassinar<br>
-                    Pra não mais ser teu refém,<br>
-                    Maldita saudade!"
-                </div>
-            </div>
-        </div>
-    </section>
+<div class="about-grid">
+<div class="about-text">
+<h3>Trajetória</h3>
+<p>Poeta, escritor independente e agente cultural atuante em Leme/SP. Sua trajetória é marcada pela valorização da poesia como instrumento de expressão, reflexão e transformação social.</p>
+<p>Busca aproximar a literatura do cotidiano e ampliar o acesso à cultura, participando de saraus, encontros literários, feiras culturais e festivais holísticos.</p>
+<p>Promove a interação entre poesia e público de diferentes faixas etárias, com temas humanos, sociais, existenciais e cotidianos.</p>
 
-    <!-- POEZINES -->
-    <section id="poezines" class="bg-white">
-        <div class="container">
-            <h2>Poezines</h2>
-            <p class="section-subtitle">Edições independentes em formato digital</p>
-            
-            <!-- POEZINE #01 - BOHEMIA -->
-            <div class="product-card" style="max-width: 600px; margin: 0 auto 40px; border: 3px solid #635BFF;">
-                <div class="product-header poezine">
-                    <div class="subtitle">Edição Digital</div>
-                    <h3>Poezine #01 — Bohemia</h3>
-                    <div style="font-size: 14px; margin-top: 15px; opacity: 0.9;">
-                        Fã, zine • Fev/2016
-                    </div>
-                </div>
-                <div class="product-content" style="text-align: center;">
-                    <p style="color: #666; margin-bottom: 20px;">
-                        7 poemas sobre solidão, amor, saudade e sonhos. 
-                        Inclui: Boemia, Amor de madrugada, A falta, 
-                        Coisas do coração, Saudade I, Sonho sonhado e 
-                        Menina mulher (bônus).
-                    </p>
-                    
-                    <ul style="text-align: left; max-width: 300px; margin: 0 auto 30px;">
-                        <li>PDF formato A5 (11 páginas)</li>
-                        <li>Capa e contracapa originais</li>
-                        <li>Layout profissional para leitura</li>
-                        <li>Download imediato</li>
-                    </ul>
-                    
-                    <div class="price-row" style="justify-content: center;">
-                        <span class="price">R$ 9,90</span>
-                    </div>
-                    
-                    <!-- SUBSTITUA PELO SEU LINK DA STRIPE -->
-                    <a href="https://buy.stripe.com/SEU-LINK-BOHEMIA" class="btn" style="font-size: 16px; padding: 20px 50px;">
-                        Comprar Agora
-                    </a>
-                    
-                    <div class="payment-methods">
-                        <p>Formas de pagamento</p>
-                        <small style="color: #888;">💳 Cartão • 📱 PIX • 🏦 Boleto</small>
-                    </div>
-                    
-                    <p style="font-size: 12px; color: #888; margin-top: 20px;">
-                        Após a compra, você será redirecionado para a página de download
-                    </p>
-                </div>
-            </div>
+<h3 style="margin-top: 40px;">Formação</h3>
+<p>Ex-aluno da Faculdade Anhanguera de Leme (Psicologia). Ministrou o minicurso <em>"Considerações a cerca da inspiração poética"</em> e apresentou na Conferência Nacional de Psicologia o trabalho <em>"Dualidade Arte x Ciência: a inspiração poética como ponto de intersecção no sujeito"</em>.</p>
+</div>
 
-            <!-- Futuros poezines -->
-            <div style="text-align: center; margin-top: 60px; padding: 40px; background: #f9f9f9; border-radius: 15px;">
-                <h3 style="font-style: italic; margin-bottom: 15px;">Em Breve</h3>
-                <p style="color: #666; margin-bottom: 20px;">
-                    Poezines #02 a #06 estarão disponíveis em breve.<br>
-                    Cadastre seu e-mail para ser notificado.
-                </p>
-                <p style="font-size: 14px; color: #888;">
-                    xicofalo@gmail.com
-                </p>
-            </div>
-        </div>
-    </section>
+<div class="about-info">
+<h4>Dados Pessoais</h4>
+<ul>
+<li><strong>Nome:</strong> Fábio Lopes Francisco</li>
+<li><strong>Nome Artístico:</strong> Xico FaLô!</li>
+<li><strong>Estado Civil:</strong> Casado | 41 anos</li>
+<li><strong>E-mail:</strong> xicofalo@gmail.com</li>
+<li><strong>Facebook:</strong> @poetaxicofalo</li>
+</ul>
 
-    <!-- Sobre -->
-    <section id="sobre" class="bg-dark">
-        <div class="container" style="max-width: 800px; text-align: center;">
-            <h2 style="color: #635BFF;">Xico FaLô!</h2>
-            <p style="color: #aaa; margin-bottom: 40px; line-height: 1.8;">
-                Poeta, escritor e compositor de Leme, interior de São Paulo. 
-                Graduado em Psicologia, trabalha com crianças e adolescentes autistas. 
-                A poesia começou aos 13 anos, quando uma professora de português 
-                despertou seu potencial criativo.
-            </p>
-            <p style="color: #888; font-size: 14px;">
-                "A frieza do relógio não compete com a quentura do meu coração, 
-                coração que bate, 4x4, sem lógica, e sem nenhuma razão." — Raul Seixas
-            </p>
-        </div>
-    </section>
+<h4 style="margin-top: 30px;">Áreas de Atuação</h4>
+<ul>
+<li>Poesia autoral</li>
+<li>Literatura independente</li>
+<li>Saraus e mediação poética</li>
+<li>Intervenções urbanas</li>
+<li>Produção de zines</li>
+<li>Formação de leitores</li>
+<li>Ações culturais comunitárias</li>
+<li>Arte e cultura popular</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="logo">Versos & Algoritmos</div>
-        <p>Xico FaLô! • Poesia Independente</p>
-        <p style="margin-top: 30px; font-size: 12px;">
-            © 2024 • Todos os direitos reservados<br>
-            xicofalo@gmail.com • (19) 99744-9677<br>
-            @poetaxicofalo
-        </p>
-    </footer>
+<section id="poemas" class="bg-white">
+<div class="container">
+<h2>Amostras</h2>
+<p class="section-subtitle">Trechos da obra de Xico FaLô!</p>
+
+<div class="poem-preview">
+<span class="tag">Soneto</span>
+<h4>Soneto Convite</h4>
+<div class="verses">Dia de visita
+
+Hoje meus versos terão visita
+Por isso, caprichei bem na escrita
+Para poder apresentá-los
+A quem a eles fizer visita
+
+Vou mostrar os meus calos
+Onde dói, onde excita
+Tudo isso publicamente
+A quem a eles fizer visita
+
+Ainda hoje tem gente carente
+Enchendo a cara de birita
+Mas pra quem a meus versos fizer visita
+Proponho um ponto de partida:
+
+Amor e dor em rima, agora inspira
+Quem a eles fizer visita.</div>
+</div>
+
+<div class="poem-preview">
+<span class="tag" style="background: #dc2626; color: #fff;">Lutema</span>
+<h4>Aquecimento Global</h4>
+<div class="verses">Deixada na Casa da Natureza — FCA UNESP, Botucatu/SP — Março/2015
+
+Na lei da selva
+Mais forte sobrevive
+Mas é puro instinto
+Raciocínio não existe
+
+E você que pensa
+É o pior dos animais
+Tem o dom da fala e compreensão
+Mas prefere causar dor e sofrimento
+
+Para a nova geração
+Sua ganância é tanta
+Que até o clima está mudando
+
+Creio que o instinto animal
+Superou seu lado racional
+Causando um fenômeno incontrolável
+O famoso aquecimento global.</div>
+</div>
+
+<div class="poem-preview">
+<span class="tag">Natureza</span>
+<h4>Água em Movimento</h4>
+<div class="verses">Estas nuvens baixas
+Que sem transparecerem
+Carregam água
+
+Tanques pesados
+Milhares de caixas d'água
+
+E eu, na verdade,
+Aprendi a ver as ondas
+Em nuvens pluviais
+
+Onde já me peguei surfando
+Num tubo de vertigem
+Fora do corpo
+
+O olho da alma
+Desperta do trauma
+
+Mas agora me sinto
+Me pertenço, sou calma
+Sou água em movimento na nuvem.</div>
+</div>
+
+<div class="poem-preview">
+<span class="tag">Existencial</span>
+<h4>Viva Sua Loucura</h4>
+<div class="verses">SENÃO, VAI SE ATROFIAR
+
+ENTORPECIDO EM BUSCA DA CURA
+
+MORRENDO SEM VIVER</div>
+</div>
+</div>
+</section>
+
+<section id="poezines" class="bg-cream">
+<div class="container">
+<h2>Poezines</h2>
+<p class="section-subtitle">Coleção de 6 poezines artesanais e independentes — 6 poemas em cada edição + 1 bônus na contra-capa</p>
+
+<div class="product-grid">
+<div class="product-card">
+<div class="product-header poezine">
+<div class="subtitle">Edição Digital</div>
+<h3>Poezine #01</h3>
+<div style="font-size: 14px; margin-top: 15px; opacity: 0.9;">Temática: Romântico-Boêmio</div>
+</div>
+<div class="product-content">
+<p style="color: #666; margin-bottom: 20px; font-size: 14px;">7 poemas sobre solidão, amor, saudade e sonhos.</p>
+<ul>
+<li>Coisas do coração</li>
+<li>Boemia</li>
+<li>Amor de madrugada</li>
+<li>A falta</li>
+<li>Sonho sonhado</li>
+<li>Saudade I</li>
+<li><em>Bônus na contra-capa</em></li>
+</ul>
+<div class="price-row" style="justify-content: center;"><span class="price">R$` 5,00</span></div>
+<a href="#" class="btn" style="width: 100%; text-align: center; display: block;">Comprar Agora</a>
+</div>
+</div>
+
+<div class="product-card">
+<div class="product-header poezine">
+<div class="subtitle">Edição Digital</div>
+<h3>Poezine #02</h3>
+<div style="font-size: 14px; margin-top: 15px; opacity: 0.9;">Temática: Romântico-Contemplativo</div>
+</div>
+<div class="product-content">
+<p style="color: #666; margin-bottom: 20px; font-size: 14px;">7 poemas sobre inspiração, olhares e sonhos.</p>
+<ul>
+<li>O roubo</li>
+<li>Inspiração</li>
+<li>Luar</li>
+<li>Um olhar</li>
+<li>Um sonho de sorriso</li>
+<li>Saudade II</li>
+<li><em>Bônus na contra-capa</em></li>
+</ul>
+<div class="price-row" style="justify-content: center;"><span class="price">R`$ 5,00</span></div>
+<a href="#" class="btn" style="width: 100%; text-align: center; display: block;">Comprar Agora</a>
+</div>
+</div>
+
+<div class="product-card">
+<div class="product-header poezine">
+<div class="subtitle">Edição Digital</div>
+<h3>Poezine #03</h3>
+<div style="font-size: 14px; margin-top: 15px; opacity: 0.9;">Temática: Romântico-Existencial</div>
+</div>
+<div class="product-content">
+<p style="color: #666; margin-bottom: 20px; font-size: 14px;">7 poemas sobre espera, desilusão e obsessão.</p>
+<ul>
+<li>De você, sei quase nada</li>
+<li>Dividendos</li>
+<li>A espera</li>
+<li>Como eu queria</li>
+<li>Desilusão</li>
+<li>Fim da obsessão</li>
+<li><em>Bônus na contra-capa</em></li>
+</ul>
+<div class="price-row" style="justify-content: center;"><span class="price">R$` 5,00</span></div
+<a href="#" class="btn" style="width: 100%; text-align: center; display: block;">Comprar Agora</a>
+</div>
+</div>
+
+<div class="product-card">
+<div class="product-header poezine">
+<div class="subtitle">Edição Digital</div>
+<h3>Poezine #04</h3>
+<div style="font-size: 14px; margin-top: 15px; opacity: 0.9;">Temática: Romântico-Melancólico</div>
+</div>
+<div class="product-content">
+<p style="color: #666; margin-bottom: 20px; font-size: 14px;">7 poemas sobre repressão, dor e despedida.</p>
+<ul>
+<li>Romântico reprimido</li>
+<li>Palhaço machucado</li>
+<li>A garota do sapato vermelho</li>
+<li>Despedida (acróstico)</li>
+<li>Sensações</li>
+<li>Continuaremos?</li>
+<li><em>Bônus na contra-capa</em></li>
+</ul>
+<div class="price-row" style="justify-content: center;"><span class="price">R`$ 5,00</span></div>
+<a href="#" class="btn" style="width: 100%; text-align: center; display: block;">Comprar Agora</a>
+</div>
+</div>
+
+<div class="product-card">
+<div class="product-header poezine">
+<div class="subtitle">Edição Digital</div>
+<h3>Poezine #05</h3>
+<div style="font-size: 14px; margin-top: 15px; opacity: 0.9;">Temática: Maluco-Sonhador</div>
+</div>
+<div class="product-content">
+<p style="color: #666; margin-bottom: 20px; font-size: 14px;">7 poemas sobre mistério, olhares e imaginação.</p>
+<ul>
+<li>Escolha na folha</li>
+<li>Rimas</li>
+<li>Um mistério</li>
+<li>Olhos</li>
+<li>Num papel de bobina</li>
+<li>Miguel</li>
+<li><em>Bônus na contra-capa</em></li>
+</ul>
+<div class="price-row" style="justify-content: center;"><span class="price">R$` 5,00</span></div
+<a href="#" class="btn" style="width: 100%; text-align: center; display: block;">Comprar Agora</a>
+</div>
+</div>
+
+<div class="product-card">
+<div class="product-header poezine">
+<div class="subtitle">Edição Digital</div>
+<h3>Poezine #06</h3>
+<div style="font-size: 14px; margin-top: 15px; opacity: 0.9;">Temática: Existencial-Transcendental</div>
+</div>
+<div class="product-content">
+<p style="color: #666; margin-bottom: 20px; font-size: 14px;">7 poemas sobre devaneio, luto e futuro.</p>
+<ul>
+<li>Avante!</li>
+<li>Devaneio</li>
+<li>Amigos de Marte</li>
+<li>Luto da inspiração</li>
+<li>Futuro incerto</li>
+<li>Alta maré</li>
+<li><em>Bônus na contra-capa</em></li>
+</ul>
+<div class="price-row" style="justify-content: center;"><span class="price">R`$ 5,00</span></div>
+<a href="#" class="btn" style="width: 100%; text-align: center; display: block;">Comprar Agora</a>
+</div>
+</div>
+</div>
+
+<div style="text-align: center; margin-top: 60px; padding: 50px; background: linear-gradient(135deg, #1a1a2e 0%, #4a4a4a 100%); border-radius: 20px; color: #fff;">
+<h3 style="font-style: italic; font-size: 32px; margin-bottom: 15px;">Combo Coleção Completa</h3>
+<p style="opacity: 0.9; margin-bottom: 25px;">Os 6 poezines em uma única compra — 42 poemas + bônus</p>
+<div class="price-row" style="justify-content: center; margin-bottom: 25px;">
+<span class="price" style="color: #fff;">Rlatex
+ 49,90&lt;/span&gt; &lt;span class="price-old" style="color: #aaa;"&gt;R
+
+ 59,40</span>
+</div>
+<a href="#" class="btn" style="background: #fff; color: #1a1a2e; border-color: #fff;">Comprar Coleção</a>
+<p style="font-size: 12px; opacity: 0.7; margin-top: 20px;">Economize R$` 9,50 na compra do combo</p>
+</div>
+</div>
+</section>
+
+<section id="lutemas" class="bg-white">
+<div class="container">
+<h2>Lutemas</h2>
+<p class="section-subtitle">Temas de Luta em Poemas — Crítica direta e sem censura, despida de romantização</p>
+
+<div class="product-card" style="max-width: 700px; margin: 0 auto;">
+<div class="product-header lutema">
+<div class="subtitle">Projeto Poético Social</div>
+<h3>Lutemas</h3>
+<div style="font-size: 14px; margin-top: 15px; opacity: 0.9;">Retrato poético da realidade social contemporânea</div>
+</div>
+<div class="product-content" style="text-align: center;">
+<p style="color: #666; margin-bottom: 25px; line-height: 1.8;">Projeto poético sobre luta, resistência, superação e transformação social. Poesia que retrata a realidade social contemporânea sem romantização.</p>
+<ul style="text-align: left; max-width: 400px; margin: 0 auto 30px;">
+<li>O Mal do Capital</li>
+<li>Não à Redução da Maior Idade</li>
+<li>Expressão</li>
+<li>O Sol pela Sombra</li>
+<li>Aquecimento Global</li>
+</ul>
+<div class="price-row" style="justify-content: center;"><span class="price">R`$ 7,50</span></div>
+<a href="#" class="btn" style="font-size: 16px; padding: 20px 50px;">Comprar Agora</a>
+<div class="payment-methods">
+<p>Formas de pagamento</p>
+<small style="color: #888;">💳 Cartão • 📱 PIX • 🏦 Boleto</small>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="obra" class="bg-cream">
+<div class="container">
+<h2>Obra Completa</h2>
+<p class="section-subtitle">O livro que reúne toda a trajetória poética de Xico FaLô!</p>
+
+<div class="product-card" style="max-width: 800px; margin: 0 auto; border: 3px solid #635BFF;">
+<div class="product-header obra">
+<div class="subtitle">Livro Digital</div>
+<h3>Poemas e poesias<br>entre sonhos e devaneios</h3>
+<div style="font-size: 14px; margin-top: 15px; opacity: 0.9;">Xico FaLô! | Obra Completa</div>
+</div>
+<div class="product-content" style="text-align: center;">
+<p style="color: #666; margin-bottom: 25px; line-height: 1.8; max-width: 600px; margin-left: auto; margin-right: auto;">A publicação definitiva que reúne os 6 poezines, os Lutemas e poemas inéditos. Uma jornada completa pelo universo poético de Xico FaLô!, do romântico-boêmio ao maluco-sonhador e existencial.</p>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 30px 0; text-align: left;">
+<div style="background: #f9f9f9; padding: 20px; border-radius: 10px;">
+<h5 style="color: #635BFF; margin-bottom: 10px; font-size: 14px; text-transform: uppercase; letter-spacing: 1px;">Conteúdo</h5>
+<p style="font-size: 13px; color: #666;">6 Poezines completos + Lutemas + Poemas inéditos</p>
+</div>
+<div style="background: #f9f9f9; padding: 20px; border-radius: 10px;">
+<h5 style="color: #635BFF; margin-bottom: 10px; font-size: 14px; text-transform: uppercase; letter-spacing: 1px;">Formato</h5>
+<p style="font-size: 13px; color: #666;">PDF em alta qualidade para leitura e impressão</p>
+</div>
+<div style="background: #f9f9f9; padding: 20px; border-radius: 10px;">
+<h5 style="color: #635BFF; margin-bottom: 10px; font-size: 14px; text-transform: uppercase; letter-spacing: 1px;">Bônus</h5>
+<p style="font-size: 13px; color: #666;">Versos inéditos e notas do autor sobre cada poema</p>
+</div>
+</div>
+
+<div class="price-row" style="justify-content: center; margin: 30px 0;">
+<span class="price">R 59,90</span>
+</div>
+
+<a href="#" class="btn" style="font-size: 18px; padding: 22px 60px;">Comprar Obra Completa</a>
+
+<div class="payment-methods">
+<p>Formas de pagamento</p>
+<small style="color: #888;">💳 Cartão • 📱 PIX • 🏦 Boleto</small>
+</div>
+
+<div class="trust-badges" style="margin-top: 20px;">
+<div class="trust-badge">✓ Download Imediato</div>
+<div class="trust-badge">✓ Leitura Offline</div>
+<div class="trust-badge">✓ Atualizações Grátis</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="eventos" class="bg-white">
+<div class="container">
+<h2>Participações & Eventos</h2>
+<p class="section-subtitle">Saraus, feiras e festivais que marcaram a trajetória</p>
+
+<div class="event-card">
+<div class="date">07 de abril de 2018 — Leme/SP</div>
+<h4>Sarau Itinerante no Anfiteatro Municipal</h4>
+<p>Lançamento 'Vozes da Periferia Vol. 7' — Recital poético com microfone aberto</p>
+</div>
+
+<div class="event-card">
+<div class="date">10 de junho de 2018 — Leme/SP</div>
+<h4>Sarau de Outono — COCU Coletivo Cultural</h4>
+<p>Praça do Colégio Maria Joaquina | Intervenções poéticas em evento multicultural</p>
+</div>
+
+<div class="event-card">
+<div class="date">08 de setembro de 2018 — Araras/SP</div>
+<h4>Mystic Araras — Feira Holística da Região</h4>
+<p>Apresentação poética com exposição do Soneto Convite</p>
+</div>
+
+<div class="event-card">
+<div class="date">22 de setembro de 2018 — Socorro/SP</div>
+<h4>Feira Holística — Kza Saphira e Camping Vale das Águas</h4>
+<p>'A Poesia e a Inspiração Poética na Escrita Criativa'</p>
+</div>
+
+<div class="event-card">
+<div class="date">21 de outubro de 2018 — Leme/SP</div>
+<h4>1º Festival Holístico de Leme</h4>
+<p>Lago Municipal | Saraus e intervenções poéticas ao ar livre</p>
+</div>
+
+<div class="event-card">
+<div class="date">27 de fevereiro de 2022 — Leme/SP</div>
+<h4>2º Festival Holístico de Leme</h4>
+<p>Sarau de Poesias com Xico FaLô! | Integrando programação com artistas e terapeutas holísticos</p>
+</div>
+</div>
+</section>
+
+<section class="bg-cream">
+<div class="container">
+<h2>Trupe Artinerante (2016)</h2>
+<p class="section-subtitle">Coletivo artístico dedicado à ocupação criativa dos espaços urbanos</p>
+
+<div class="trajetoria-list">
+<div class="trajetoria-item">
+<h4>Cassiano (Tico-Tuca)</h4>
+<p>Palhaço, malabares, pirofagia</p>
+</div>
+<div class="trajetoria-item">
+<h4>Mariana (Giramunda)</h4>
+<p>Palhaça, malabares, expressão corporal</p>
+</div>
+<div class="trajetoria-item">
+<h4>Julia (Soneca)</h4>
+<p>Palhaça, malabares, contato</p>
+</div>
+</div>
+
+<p style="text-align: center; margin-top: 40px; color: #666; max-width: 700px; margin-left: auto; margin-right: auto;">Democratização do acesso à arte em espaços públicos. Apresentações em praças, parques, calçadões e rodoviárias.</p>
+</div>
+</section>
+
+<section class="bg-white">
+<div class="container">
+<h2>Portfólio de Atuação</h2>
+<p class="section-subtitle">Como o poeta se apresenta e interage com o público</p>
+
+<div class="trajetoria-list">
+<div class="trajetoria-item">
+<h4>Poeta de Rua</h4>
+<p>Declamações e poesias sob demanda, direto com o público</p>
+</div>
+<div class="trajetoria-item">
+<h4>Comercialização</h4>
+<p>Venda de poezines e Lutemas em eventos e espaços públicos</p>
+</div>
+<div class="trajetoria-item">
+<h4>Incentivo à Leitura</h4>
+<p>Ações de incentivo à leitura e escrita criativa</p>
+</div>
+<div class="trajetoria-item">
+<h4>Oficina Poética</h4>
+<p>"Me dê um tema que te dou um poema" — interação ao vivo</p>
+</div>
+<div class="trajetoria-item">
+<h4>Momentos de Escuta</h4>
+<p>Onde o interlocutor é protagonista e o poeta é espectador</p>
+</div>
+<div class="trajetoria-item">
+<h4>Histórias que Viram Versos</h4>
+<p>O poeta como espectador de histórias que se transformam em poesia</p>
+</div>
+</div>
+</div>
+</section>
+
+<section class="bg-dark">
+<div class="container" style="max-width: 900px; text-align: center;">
+<h2 style="color: #b8860b; margin-bottom: 50px;">Objetivos Culturais</h2>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; text-align: left;">
+<div style="padding: 25px; border-left: 3px solid #b8860b;">
+<p style="color: #ccc; font-size: 15px;">Promover a democratização do acesso à arte e à literatura</p>
+</div>
+<div style="padding: 25px; border-left: 3px solid #b8860b;">
+<p style="color: #ccc; font-size: 15px;">Descentralização cultural e formação de público</p>
+</div>
+<div style="padding: 25px; border-left: 3px solid #b8860b;">
+<p style="color: #ccc; font-size: 15px;">Valorização da produção artística independente</p>
+</div>
+<div style="padding: 25px; border-left: 3px solid #b8860b;">
+<p style="color: #ccc; font-size: 15px;">Construção de espaços de encontro, reflexão e pertencimento</p>
+</div>
+<div style="padding: 25px; border-left: 3px solid #b8860b;">
+<p style="color: #ccc; font-size: 15px;">Fortalecimento da cultura como direito fundamental</p>
+</div>
+<div style="padding: 25px; border-left: 3px solid #b8860b;">
+<p style="color: #ccc; font-size: 15px;">Poesia como ferramenta de transformação social</p>
+</div>
+</div>
+</div>
+</section>
+
+<section class="bg-cream">
+<div class="container" style="max-width: 800px; text-align: center;">
+<h2 style="color: #b8860b;">Xico FaLô!</h2>
+<p style="color: #555; margin-bottom: 40px; line-height: 1.8; font-size: 18px;">Poeta, escritor e compositor de Leme, interior de São Paulo. Graduado em Psicologia, trabalha com crianças e adolescentes autistas. A poesia começou aos 13 anos, quando uma professora de português despertou seu potencial criativo.</p>
+<p style="color: #888; font-size: 16px; font-style: italic; line-height: 1.8;">"A frieza do relógio não compete com a quentura do meu coração, coração que bate, 4x4, sem lógica, e sem nenhuma razão." — Raul Seixas</p>
+</div>
+</section>
+
+<footer>
+<div class="logo">Xico FaLô!</div>
+<p>Fábio Lopes Francisco | Poeta Independente | Agente Cultural</p>
+<p style="margin-top: 20px; font-size: 14px;">xicofalo@gmail.com | @poetaxicofalo | Leme/SP</p>
+<p style="margin-top: 30px; font-size: 12px; color: #444;">© 2024 | Todos os direitos reservados<br>— Aprecie sem moderação —</p>
+</footer>
 
 </body>
-</html>
+</html>'''
+
+[  ]
