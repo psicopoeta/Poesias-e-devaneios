@@ -2,125 +2,286 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pentáculo Poético | Xico FaLô!</title>
 
 <style>
 
 body{
+font-family: Georgia, serif;
 background:#f5f2ed;
-font-family:Georgia,serif;
-padding:40px;
+margin:0;
+padding:0;
+color:#1a1a1a;
+}
+
+header{
+background:#1a1a1a;
+color:white;
+padding:30px;
+text-align:center;
+}
+
+header h1{
+margin:0;
+font-style:italic;
 }
 
 .container{
-max-width:900px;
+max-width:1000px;
 margin:auto;
-}
-
-h1{
-text-align:center;
-font-style:italic;
+padding:30px;
 }
 
 .card{
 background:white;
 padding:30px;
 border-radius:15px;
-margin-top:30px;
-box-shadow:0 5px 20px rgba(0,0,0,.1);
+box-shadow:0 5px 20px rgba(0,0,0,.08);
+margin-bottom:30px;
 }
 
-button{
+h2{
+color:#b8860b;
+}
+
+.elementos{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+gap:15px;
+margin-top:20px;
+}
+
+.botao{
+padding:15px;
+border:none;
+border-radius:10px;
+cursor:pointer;
+font-size:16px;
+font-weight:bold;
+}
+
+.terra{background:#8B7355;color:white;}
+.agua{background:#4682B4;color:white;}
+.fogo{background:#B22222;color:white;}
+.ar{background:#708090;color:white;}
+.eter{background:#6A5ACD;color:white;}
+
+.resultado{
+margin-top:30px;
+padding:20px;
+border-left:5px solid #635BFF;
+background:#fafafa;
+display:none;
+}
+
+textarea{
+width:100%;
+height:180px;
+padding:15px;
+font-size:16px;
+border-radius:10px;
+border:1px solid #ddd;
+}
+
+.btn{
+margin-top:15px;
+padding:15px 30px;
 background:#635BFF;
 color:white;
 border:none;
-padding:15px 25px;
 border-radius:30px;
 cursor:pointer;
-margin:10px;
 }
 
-.resultado{
-margin-top:25px;
-padding:20px;
-background:#fafafa;
-border-left:4px solid #635BFF;
+footer{
+text-align:center;
+padding:40px;
+color:#666;
 }
 
 </style>
-</head>
 
+</head>
 <body>
+
+<header>
+<h1>Pentáculo Poético</h1>
+<p>Uma leitura simbólica da alma através da poesia</p>
+</header>
 
 <div class="container">
 
-<h1>Pentáculo Poético</h1>
+<div class="card">
+
+<h2>Escolha um Elemento</h2>
+
+<p>
+Cada elemento representa uma dimensão simbólica da experiência humana.
+</p>
+
+<div class="elementos">
+
+<button class="botao terra" onclick="mostrar('terra')">
+🌱 Terra
+</button>
+
+<button class="botao agua" onclick="mostrar('agua')">
+🌊 Água
+</button>
+
+<button class="botao fogo" onclick="mostrar('fogo')">
+🔥 Fogo
+</button>
+
+<button class="botao ar" onclick="mostrar('ar')">
+🌬️ Ar
+</button>
+
+<button class="botao eter" onclick="mostrar('eter')">
+✨ Éter
+</button>
+
+</div>
+
+<div id="resultadoElemento" class="resultado"></div>
+
+</div>
 
 <div class="card">
 
-<h2>Escolha um elemento</h2>
+<h2>Diário Poético</h2>
 
-<button onclick="mostrar('fogo')">🔥 Fogo</button>
-<button onclick="mostrar('agua')">💧 Água</button>
-<button onclick="mostrar('terra')">🌱 Terra</button>
-<button onclick="mostrar('ar')">🌬️ Ar</button>
-<button onclick="mostrar('eter')">✨ Éter</button>
+<p>
+Escreva livremente. O Pentáculo buscará o elemento predominante.
+</p>
 
-<div id="resultado" class="resultado"></div>
+<textarea id="texto"></textarea>
+
+<br>
+
+<button class="btn" onclick="analisar()">
+Interpretar Escrita
+</button>
+
+<div id="resultadoAnalise" class="resultado"></div>
 
 </div>
 
 </div>
+
+<footer>
+
+<p>
+Xico FaLô! © 2026
+</p>
+
+</footer>
 
 <script>
 
 const elementos = {
 
-fogo:{
-poema:"Viva Sua Loucura",
-jung:"Transformação e energia psíquica.",
-bachelard:"O fogo simboliza paixão e renascimento."
+terra:{
+poema:"Sou raiz que insiste em permanecer mesmo quando os ventos mudam.",
+jung:"Necessidade de segurança, estrutura e pertencimento.",
+bachelard:"A terra simboliza abrigo, permanência e materialização."
 },
 
 agua:{
-poema:"Água em Movimento",
-jung:"Profundidade emocional.",
-bachelard:"A água representa imaginação e fluidez."
+poema:"Sou água em movimento na nuvem.",
+jung:"Expressão emocional e transformação interior.",
+bachelard:"A água representa profundidade, sonho e memória."
 },
 
-terra:{
-poema:"Soneto Convite",
-jung:"Enraizamento e realidade.",
-bachelard:"A matéria concreta da experiência."
+fogo:{
+poema:"Viva sua loucura, senão vai se atrofiar.",
+jung:"Energia psíquica voltada para mudança e individuação.",
+bachelard:"O fogo simboliza desejo, impulso criativo e renovação."
 },
 
 ar:{
-poema:"Boemia",
-jung:"Pensamento e liberdade.",
-bachelard:"O voo da imaginação poética."
+poema:"Futuro incerto, pensamento em movimento.",
+jung:"Busca de sentido e elaboração intelectual.",
+bachelard:"O ar representa imaginação, liberdade e transcendência."
 },
 
 eter:{
-poema:"Aquecimento Global",
-jung:"Consciência coletiva.",
-bachelard:"Integração dos elementos."
+poema:"Entre sonhos e devaneios, habita o invisível.",
+jung:"Contato com o Self e símbolos arquetípicos.",
+bachelard:"O éter representa a dimensão poética do mistério."
 }
 
 };
 
-function mostrar(elemento){
+function mostrar(nome){
 
-const e = elementos[elemento];
+let e = elementos[nome];
 
-document.getElementById("resultado").innerHTML = `
-<h3>${e.poema}</h3>
+document.getElementById("resultadoElemento").style.display="block";
 
-<p><strong>Leitura Junguiana:</strong><br>
-${e.jung}</p>
+document.getElementById("resultadoElemento").innerHTML=
 
-<p><strong>Leitura Bachelardiana:</strong><br>
-${e.bachelard}</p>
-`;
+"<h3>"+nome.toUpperCase()+"</h3>"+
+
+"<p><strong>Poema:</strong><br>"+e.poema+"</p>"+
+
+"<p><strong>Jung:</strong><br>"+e.jung+"</p>"+
+
+"<p><strong>Bachelard:</strong><br>"+e.bachelard+"</p>";
+
+}
+
+function analisar(){
+
+let texto =
+document.getElementById("texto").value.toLowerCase();
+
+let elemento="ÉTER";
+
+if(
+texto.includes("amor") ||
+texto.includes("saudade") ||
+texto.includes("lágrima") ||
+texto.includes("sentimento")
+){
+elemento="ÁGUA";
+}
+
+else if(
+texto.includes("luta") ||
+texto.includes("raiva") ||
+texto.includes("transformação") ||
+texto.includes("mudança")
+){
+elemento="FOGO";
+}
+
+else if(
+texto.includes("pensamento") ||
+texto.includes("futuro") ||
+texto.includes("ideia") ||
+texto.includes("sonho")
+){
+elemento="AR";
+}
+
+else if(
+texto.includes("casa") ||
+texto.includes("família") ||
+texto.includes("trabalho") ||
+texto.includes("corpo")
+){
+elemento="TERRA";
+}
+
+document.getElementById("resultadoAnalise").style.display="block";
+
+document.getElementById("resultadoAnalise").innerHTML=
+
+"<h3>Elemento predominante: "+elemento+"</h3>"+
+
+"<p>Esta é uma interpretação simbólica inicial baseada em palavras-chave presentes na escrita.</p>";
 
 }
 
