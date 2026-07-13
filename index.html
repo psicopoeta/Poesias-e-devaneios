@@ -24,15 +24,19 @@ box-shadow: 0 2px 15px rgba(0,0,0,0.08);
 border-bottom: 1px solid #e5e5e5;
 }
 .nav-flex {
-display: flex;
-justify-content: space-between;
-align-items: center;
+    display: flex;
+    flex-direction: column; /* Alinha o logo e os links verticalmente */
+    align-items: center;    /* Centraliza tudo horizontalmente */
+    justify-content: center;
+    padding: 10px 0;        /* Dá um espaçamento agradável no topo e embaixo */
 }
 .logo {
-font-size: 10px;
-font-weight: 50px;
-font-style: italic;
-letter-spacing: -0.5px;
+    max-width: 25vw;  /* Limita o logo a no máximo 25% da largura da tela */
+    max-height: 60px; /* Garante que ele não fique muito alto em telas grandes */
+    width: auto;      /* Mantém a proporção da imagem */
+    height: auto;
+    display: block;
+    margin: 0 auto;   /* Centraliza o logo horizontalmente */
 }
 .nav-links { display: flex; gap: 35px; }
 .nav-links a {
